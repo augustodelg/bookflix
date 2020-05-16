@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ElegirPlanController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Plan normal</h5>
+        <p class="card-text">Servicio de hasta 2 perfiles.</p>
+        <a href="{{ path('perfil_normal') }}" class="btn btn-primary">Seleccionar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Plan premium</h5>
+        <p class="card-text">Servicio de hasta 4 perfiles.</p>
+        <a href="{{ path('perfil_premium') }}" class="btn btn-primary">Seleccionar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
