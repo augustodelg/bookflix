@@ -1,4 +1,4 @@
-# Bookflix
+# Bookflix - Ingenieria de Software 2
 Proyecto Objetos 2 UNLP INFORMATICA
 ### ALUMNOS 
 * German Velazquez
