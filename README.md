@@ -6,5 +6,5 @@ Proyecto Objetos 2 UNLP INFORMATICA
 * Augusto Del Grosso
 
 ## Construido con 🛠️
-* Symfony
+* Symfony 5
 * Bootstrap 4
