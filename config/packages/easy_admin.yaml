@@ -1,0 +1,15 @@
+#easy_admin:
+#    entities:
+#        # List the entity class name you want to manage
+#        - App\Entity\Product
+#        - App\Entity\Category
+#        - App\Entity\User
+easy_admin:
+  site_name: 'BOOKFLIX <em style="font-size: 80%;">Admin Panel</em>'
+  entities:
+    Novedades:
+        class: App\Entity\Novedad
+        list:
+          fields: ['titulo', 'descripcion', { property: 'foto', type: 'image', base_path: '/uploads/files/' }]
+        form:
+          fields: ['titulo', 'descripcion', { property: 'foto', type: 'file_upload',  type_options: { upload_dir: '/public/uploads/files/', upload_filename: '[contenthash].[extension]' }}]
