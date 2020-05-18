@@ -242,3 +242,4 @@ class Cuenta implements UserInterface
         return $this;
     }
 }
+ 

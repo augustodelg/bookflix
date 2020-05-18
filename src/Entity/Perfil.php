@@ -37,7 +37,7 @@ class Perfil
     {
         $this->favoritos = new ArrayCollection();
     }
-
+ 
     public function getId(): ?int
     {
         return $this->id;

@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form;
 use App\Entity\Cuenta;
+use App\Entity\Perfil;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -63,6 +64,7 @@ class RegistroController extends AbstractController
 
         $user = new Cuenta();
         $tarjeta = new Tarjeta();
+        $perfil = new Perfil();
 
         if ($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
@@ -94,13 +96,20 @@ class RegistroController extends AbstractController
                 $this->addFlash('error','El email ya esta en uso!');
                 return $this-> render('registro/error.html.twig');
             }
-            // $soloLetras="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+            
+            $nom=(string)$data['nombre'];
+            
+            if (preg_match('/[0-9]{1}/',$nom)){
+                $this->addFlash('error','El nombre solo debe contener letras!');
+                return $this-> render('registro/error.html.twig');
+            }
 
+            $ap=(string)$data['apellido'];
 
-            // if (preg_match($soloLetras,$data['nombre'])==0){
-            //     $this->addFlash('error','El nombre no puede tener numeros!');
-            //     return $this-> render('registro/error.html.twig');
-            // }
+            if (preg_match('/[0-9]{1}/',$ap)){
+                $this->addFlash('error','El apellido solo debe contener letras!');
+                return $this-> render('registro/error.html.twig');
+            }
 
             if ($tarjeta->getCant($data['numero']) != 16){
                 $this->addFlash('error','El numero de tarjeta no es valido!');
@@ -115,6 +124,21 @@ class RegistroController extends AbstractController
                 $this->addFlash('error','La tarjeta esta vencida!');
                 return $this-> render('registro/error.html.twig');
             }
+
+            $dniTarjeta = (string)$data['dni'];
+
+            $validarDni = $em->getRepository(Tarjeta::class)->findOneBy(['dni' => $dniTarjeta]);
+
+            if (!empty($validarDni)){
+                $this->addFlash('error','La tarjeta ya esta en uso!');
+                return $this-> render('registro/error.html.twig');
+            }
+
+
+            $perfil->setNombre($data['nombre']);         
+            $user->addPerfile($perfil);
+
+            $em->persist($perfil);
             $em->persist($user);
             $em->persist($tarjeta);
             $em->flush();

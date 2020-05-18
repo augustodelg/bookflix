@@ -8,6 +8,7 @@ body{
       background: #eee;
 }
 </style>
+<div class="container mt-4">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -46,4 +47,5 @@ body{
         Entrar
     </button>
 </form>
+</div>
 {% endblock %}
