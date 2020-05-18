@@ -10,9 +10,9 @@ easy_admin:
     Novedades:
         class: App\Entity\Novedad
         list:
-          fields: ['titulo', 'descripcion', { property: 'foto', type: 'image', base_path: '%app.path.novedades_images%' }]
+          fields: ['titulo', 'DESCRIPCION', { property: 'foto', type: 'image', base_path: '%app.path.novedades_images%' }]
         form:
-          fields: ['titulo', 'descripcion', { property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.novedades_images%'}]
+          fields: ['titulo', 'DESCRIPCION', { property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.novedades_images%'}]
     Autores:
         class: App\Entity\Autor
         list:
@@ -34,9 +34,9 @@ easy_admin:
     Libros:
         class: App\Entity\Libro
         list:
-          fields: ['titulo', 'autor' , 'generos', 'editorial', 'ano']
+          fields: ['titulo','autor', 'generos', 'editorial', 'ano']
         form:
-          fields: ['isbn', 'titulo', 'autor', 'generos', 'editorial','ano', 'DESCRIPCION']
+          fields: ['isbn', 'titulo', { property: 'autor', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Autor' } }, 'generos', 'editorial','ano', 'DESCRIPCION']
 
   design:
       menu:
