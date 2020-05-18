@@ -55,6 +55,13 @@ class Libro
      */
     private $editorial;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $ano;
+
+
+
     public function __construct()
     {
         $this->generos = new ArrayCollection();
@@ -179,4 +186,18 @@ class Libro
 
         return $this;
     }
+
+    public function getAno(): ?int
+    {
+        return $this->ano;
+    }
+
+    public function setAno(?int $ano): self
+    {
+        $this->ano = $ano;
+
+        return $this;
+    }
+
+
 }

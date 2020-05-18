@@ -16,27 +16,27 @@ easy_admin:
     Autores:
         class: App\Entity\Autor
         list:
-          fields: ['nombre']
+          fields: ['nombre','libro']
         form:
-          fields: ['nombre']
+          fields: ['nombre','libro']
     Generos:
         class: App\Entity\Genero
         list:
-          field: ['nombre']
+          fields: ['nombre', 'libros']
         form:
           fields: ['nombre']
     Editoriales:
         class: App\Entity\Editorial
         list:
-          field: ['nombre']
+          fields: ['nombre','libros']
         form:
-          fields: ['nombre']
+          fields: ['nombre','libros']
     Libros:
         class: App\Entity\Libro
         list:
-          field: ['titulo, autor , genero ,año']
+          fields: ['titulo', 'autor' , 'generos', 'editorial', 'ano']
         form:
-          field: ['ISBN, titulo, autor, genero, editorial, descripcion']
+          fields: ['isbn', 'titulo', 'autor', 'generos', 'editorial','ano', 'DESCRIPCION']
 
   design:
       menu:
