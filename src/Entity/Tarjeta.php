@@ -19,14 +19,6 @@ class Tarjeta
 
 
     /**
-     * @Assert\Length(
-     *      min = 16,
-     *      max = 16,
-     *      minMessage = "minNumero",
-     *      maxMessage = "maxNumero",
-     *      allowEmptyString = false
-     * )
-     * 
      * @ORM\Column(type="integer")
      */
 
@@ -38,20 +30,17 @@ class Tarjeta
     private $dni;
 
     /**
-     * @Assert\Length(
-     *      min = 3,
-     *      max = 3,
-     *      minMessage = "El cvv de la tarjeta debe tener {{limit}} caracteres.",
-     *      maxMessage = "El cvv de la tarjeta debe tener {{limit}} caracteres.",
-     *      allowEmptyString = false
-     * )
-     * 
      * @ORM\Column(type="integer")
      */
     private $cvv;
 
     /**
      * @ORM\Column(type="date")
+     * 
+     * @Assert\GreaterThan("today",
+     *                      message = "La tarjeta de credito ingresada esta vencida!"
+     * )
+     * 
      */
     private $vencimiento;
 
@@ -128,6 +117,12 @@ class Tarjeta
         }
 
         return $this;
+    }
+
+
+    public function getCant (string $cadena): ?int
+    {
+        return strlen($cadena);
     }
 
 
