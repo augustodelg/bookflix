@@ -10,6 +10,10 @@ easy_admin:
     Novedades:
         class: App\Entity\Novedad
         list:
-          fields: ['titulo', 'descripcion', { property: 'foto', type: 'image', base_path: '/uploads/files/' }]
+          fields: ['titulo', 'descripcion', { property: 'foto', type: 'image', base_path: '%app.path.novedades_images%' }]
         form:
-          fields: ['titulo', 'descripcion', { property: 'foto', type: 'file_upload',  type_options: { upload_dir: '/public/uploads/files/', upload_filename: '[contenthash].[extension]' }}]
+          fields: ['titulo', 'descripcion', { property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.novedades_images%', upload_filename: '[year]/[month]/[day]/[slug]-[contenthash].[extension]' }]
+  design:
+      menu:
+          - { label: 'Novedad' }
+          - { entity: 'Novedades', icon: 'newspaper' }

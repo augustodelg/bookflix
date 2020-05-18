@@ -16,4 +16,8 @@ class HomeController extends AbstractController
             'controller_name' => 'Home Works!',
         ]);
     }
+
+    public function novedades(){
+        
+    }
 }

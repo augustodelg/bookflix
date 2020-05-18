@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NovedadRepository")
+ * @Vich\Uploadable
  */
 class Novedad
 {
@@ -30,6 +33,18 @@ class Novedad
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $foto;
+
+    /**
+     * @Vich\UploadableField(mapping="novedad_images", fileNameProperty="foto")
+     * @var File
+     */
+    private $fotoFile;
+
+     /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -70,5 +85,20 @@ class Novedad
         $this->foto = $foto;
 
         return $this;
+    }
+
+    public function getFotoFile()
+    {
+        return $this->fotoFile;
+    }
+
+    public function setFotoFile(File $foto = null)
+    {
+        $this->fotoFile = $foto;
+
+        if ($foto) {
+
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 }

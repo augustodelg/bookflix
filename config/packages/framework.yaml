@@ -16,3 +16,8 @@ framework:
     #fragments: true
     php_errors:
         log: true
+        
+    assets:
+        packages:
+            images:
+                base_path: 'images'
