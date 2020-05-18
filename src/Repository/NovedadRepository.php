@@ -19,6 +19,16 @@ class NovedadRepository extends ServiceEntityRepository
         parent::__construct($registry, Novedad::class);
     }
 
+    public function NovedadesInicio()
+    {
+        return $this -> getEntityManager()
+
+        ->createQuery(
+            'SELECT n.titulo, n.descripcion, n.foto
+            FROM App:Novedad n '
+        )->getResult();
+    }
+
     // /**
     //  * @return Novedad[] Returns an array of Novedad objects
     //  */
