@@ -13,7 +13,44 @@ easy_admin:
           fields: ['titulo', 'descripcion', { property: 'foto', type: 'image', base_path: '%app.path.novedades_images%' }]
         form:
           fields: ['titulo', 'descripcion', { property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.novedades_images%'}]
+    Autores:
+        class: App\Entity\Autor
+        list:
+          fields: ['nombre']
+        form:
+          fields: ['nombre']
+    Generos:
+        class: App\Entity\Genero
+        list:
+          field: ['nombre']
+        form:
+          fields: ['nombre']
+    Editoriales:
+        class: App\Entity\Editorial
+        list:
+          field: ['nombre']
+        form:
+          fields: ['nombre']
+    Libros:
+        class: App\Entity\Libro
+        list:
+          field: ['titulo, autor , genero ,año']
+        form:
+          field: ['ISBN, titulo, autor, genero, editorial, descripcion']
+
   design:
       menu:
           - { label: 'Novedad' }
           - { entity: 'Novedades', icon: 'newspaper' }
+          - { label: 'Autor' }
+          - { entity: 'Autores', icon: 'male' }
+          - { label: 'Genero' }
+          - { entity: 'Generos', icon: 'list' }
+          - { label: 'Editorial' }
+          - { entity: 'Editoriales', icon: 'warehouse' }
+          - { label: 'Libro' }
+          - { entity: 'Libros', icon: 'book' }
+
+  
+
+          

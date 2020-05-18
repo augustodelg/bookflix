@@ -37,6 +37,10 @@ class Genero
     {
         return $this->id;
     }
+    public function __toString()
+    {
+        return $this->nombre;
+    }
 
     public function getNombre(): ?string
     {

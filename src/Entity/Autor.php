@@ -24,7 +24,7 @@ class Autor
     private $nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\libro", mappedBy="autor")
+     * @ORM\OneToMany(targetEntity="App\Entity\Libro", mappedBy="autor")
      */
     private $libro;
 
@@ -79,5 +79,9 @@ class Autor
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->nombre;
     }
 }

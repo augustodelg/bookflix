@@ -21,7 +21,7 @@ class Libro
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nombre;
+    private $titulo;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -47,12 +47,18 @@ class Libro
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Perfil", mappedBy="favoritos")
      */
-    private $perfils;
+    private $perfiles;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Editorial", inversedBy="libros")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $editorial;
 
     public function __construct()
     {
         $this->generos = new ArrayCollection();
-        $this->perfils = new ArrayCollection();
+        $this->perfiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -60,14 +66,14 @@ class Libro
         return $this->id;
     }
 
-    public function getNombre(): ?string
+    public function getTitulo(): ?string
     {
-        return $this->nombre;
+        return $this->titulo;
     }
 
-    public function setNombre(string $nombre): self
+    public function setTitulo(string $titulo): self
     {
-        $this->nombre = $nombre;
+        $this->titulo = $titulo;
 
         return $this;
     }
@@ -137,15 +143,15 @@ class Libro
     /**
      * @return Collection|Perfil[]
      */
-    public function getPerfils(): Collection
+    public function getPerfiles(): Collection
     {
-        return $this->perfils;
+        return $this->perfiles;
     }
 
     public function addPerfil(Perfil $perfil): self
     {
-        if (!$this->perfils->contains($perfil)) {
-            $this->perfils[] = $perfil;
+        if (!$this->perfiles->contains($perfil)) {
+            $this->perfiles[] = $perfil;
             $perfil->addFavorito($this);
         }
 
@@ -154,10 +160,22 @@ class Libro
 
     public function removePerfil(Perfil $perfil): self
     {
-        if ($this->perfils->contains($perfil)) {
-            $this->perfils->removeElement($perfil);
+        if ($this->perfiles->contains($perfil)) {
+            $this->perfiles->removeElement($perfil);
             $perfil->removeFavorito($this);
         }
+
+        return $this;
+    }
+
+    public function getEditorial(): ?Editorial
+    {
+        return $this->editorial;
+    }
+
+    public function setEditorial(?Editorial $editorial): self
+    {
+        $this->editorial = $editorial;
 
         return $this;
     }
