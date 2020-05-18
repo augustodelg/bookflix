@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -45,6 +46,13 @@ class Novedad
      * @var \DateTime
      */
     private $updatedAt;
+
+    public function __construct()
+    {
+        $this->updatedAt = new \DateTime('now');
+    }
+
+   
 
     public function getId(): ?int
     {
@@ -100,5 +108,11 @@ class Novedad
 
             $this->updatedAt = new \DateTime('now');
         }
+    }
+
+    public function getUpdatedAt(): ?DateTime
+    {
+        return $this->updatedAt;
+
     }
 }
