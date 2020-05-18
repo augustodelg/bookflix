@@ -12,7 +12,7 @@ easy_admin:
         list:
           fields: ['titulo', 'descripcion', { property: 'foto', type: 'image', base_path: '%app.path.novedades_images%' }]
         form:
-          fields: ['titulo', 'descripcion', { property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.novedades_images%', upload_filename: '[year]/[month]/[day]/[slug]-[contenthash].[extension]' }]
+          fields: ['titulo', 'descripcion', { property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.novedades_images%'}]
   design:
       menu:
           - { label: 'Novedad' }
