@@ -2,6 +2,8 @@ security:
     encoders:
         App\Entity\Cuenta:
             algorithm: auto
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -10,6 +12,7 @@ security:
             entity:
                 class: App\Entity\Cuenta
                 property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
