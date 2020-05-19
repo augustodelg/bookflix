@@ -18,11 +18,6 @@ class Tarjeta
     private $id;
 
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-
-    private $numero;
 
     /**
      * @ORM\Column(type="integer")
@@ -49,22 +44,16 @@ class Tarjeta
      */
     private $cuenta;
 
+    /**
+     * @ORM\Column(type="bigint")
+     */
+    private $numero;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNumero(): ?int
-    {
-        return $this->numero;
-    }
-
-    public function setNumero(int $numero): self
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
 
     public function getDni(): ?int
     {
@@ -123,6 +112,18 @@ class Tarjeta
     public function getCant (string $cadena): ?int
     {
         return strlen($cadena);
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
     }
 
 

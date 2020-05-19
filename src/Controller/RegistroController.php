@@ -75,11 +75,11 @@ class RegistroController extends AbstractController
             $user->setPassword($passwordEncoder->encodePassword($user,$data['password']));
             $user->setRoles(['ROLE_USER']);
 
-            $num=(int)$data['numero']; //convierto string a int para setear el numero de tarjeta
+            $num=$data['numero']; //convierto string a int para setear el numero de tarjeta
 
             $tarjeta->setNumero($num);
             $tarjeta->setCvv($data['cvv']);
-            $tarjeta->setDni($data['dni']);
+            $tarjeta->setDni((int)$data['dni']);
             $tarjeta->setVencimiento($data['vencimiento']);
             $tarjeta->setCuenta($user);
             $user->setTarjeta($tarjeta);
