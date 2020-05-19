@@ -7,7 +7,7 @@
 
   <!-- Link Swiper's CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+  <link href='https://fonts.googleapis.com/css?family=Bebas+Neue' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
 <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 
@@ -18,21 +18,19 @@
       height: 100%;
     }
     body { 
-      background: #eee;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif, Bebas Neue;
       font-size: 14px;
       color:#000;
       margin: 0;
       padding: 0;
     }
     .swiper-container {
-      width: 100%;
+      width: 100%; 
       height: 100%;
     }
     .swiper-slide {
       text-align: center;
       font-size: 18px;
-      background: #fff;
 
       /* Center slide text vertically */
       display: -webkit-box;
@@ -52,55 +50,44 @@
 </head>
 <body>
 <div class="container">
-<p class="h1 text-center">Bienvenido a Bookflix!</p>
-<br>
+    <div class="col-xl-12 col-sm-12" style="margin-top:-3%">
+    <img src="{{ asset('bookflix_bienvenido.png', 'images') }}" class=" img-fluid rounded mx-auto d-block" height="200" width="800" alt="Bookflix" id="logo" style= "padding: 8%;" >
+    </div>
 <div class="text-center">
-<a href="{{ path('app_login') }}"" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Iniciar sesion</a>
-<a href="{{ path('registro') }}"" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Registrarse</a>
+<a href="{{ path('app_login') }}"" class="btn btn-warning btn-lg active" style="font-family: Bebas Neue" role="button" aria-pressed="true">Iniciar sesion</a>
+<a href="{{ path('registro') }}"" class="btn btn-secondary btn-lg active" style="font-family: Bebas Neue" role="button" aria-pressed="true">Registrarse</a>
 </div>
 <br>
 <br>
+<div class="container" style="background: #fff152 ; border-radius: 1.5% ; padding:10px" >
 <br>
-<p class="h3 text-center"> Algo de lo que podras encontrar:</p>
+
+
+
+
+
+<p class="h3 text-center" style="font-family: Bebas Neue"> Algo de lo que podras encontrar:</p>
 <br>
   <!-- Swiper -->
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-      <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-      <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-      <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-      <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-       <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-        <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-         <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-         <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
-         <div class="swiper-slide">
-        <img class="rounded-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa72OJO5HuXV3TwY9fo6BSDQj5-JLyy1VmxLPrZlIXG7clABAn&usqp=CAU">
-      </div>
+
+     {% for i in arrayPortadas %}
+          <div class="swiper-slide">
+              <img class="rounded-sm" style="height:400px" src="/uploads/images/portadas/{{i.foto}}">
+
+          </div>
+    {% endfor %}
+ 
+
+
+
+      
     </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
+    </div>
   </div>
   </div>
+
 
   <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/js/swiper.js"></script>

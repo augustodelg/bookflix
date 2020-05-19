@@ -1,0 +1,10 @@
+{
+  "build/css/app.css": "/build/css/app.css",
+  "build/css/register.css": "/build/css/register.css",
+  "build/js/app.js": "/build/js/app.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors~css/app.css": "/build/vendors~css/app.css",
+  "build/vendors~css/app.js": "/build/vendors~css/app.js",
+  "build/vendors~js/app.js": "/build/vendors~js/app.js",
+  "/build/images/logo.svg": "/build/images/logo.svg"
+}

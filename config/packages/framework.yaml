@@ -21,3 +21,6 @@ framework:
         packages:
             images:
                 base_path: 'images'
+            font:
+                base_path: 'font'
+    

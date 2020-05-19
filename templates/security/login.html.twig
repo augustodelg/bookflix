@@ -8,7 +8,10 @@ body{
       background: #eee;
 }
 </style>
-<div class="container mt-4">
+    <div class="col-xl-12 col-sm-12" style="margin-top:-3%">
+    <img src="{{ asset('logo.svg', 'images') }}" class=" img-fluid rounded mx-auto d-block" height="200" width="800" alt="Bookflix" id="logo" style= "padding: 8%;" >
+    </div>
+<div class="container">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

@@ -19,6 +19,13 @@ class LibroRepository extends ServiceEntityRepository
         parent::__construct($registry, Libro::class);
     }
 
+    public function portadasIndex ()
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT l.foto FROM App:Libro l'
+        )->setMaxResults(5)->getResult();
+    }
+
     // /**
     //  * @return Libro[] Returns an array of Libro objects
     //  */

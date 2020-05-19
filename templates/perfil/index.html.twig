@@ -20,7 +20,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
     </form>
     <ul class="navbar-nav ">
     <li class="nav-item active">
@@ -39,13 +39,14 @@
 <h1>Mis datos</h1>
 <br>
 <ul class="list-group">
-  <li class="list-group-item">Email:  {{email}}</li>
-  <li class="list-group-item">Nombre:  {{nombre}}</li>
-  <li class="list-group-item">Apellido:  {{apellido}}</li>
-  <li class="list-group-item">Numero de tarjeta:  {{numero}}</li>
-  <li class="list-group-item">CVV:  {{cvv}}</li>
-  <li class="list-group-item">DNI:  {{dni}}</li>
-  <li class="list-group-item">Fecha de vencimiento:  {{vencimiento}}</li>
+  <li class="list-group-item">
+  <span class="badge badge-pill badge-warning" style="border-radius:9%">Email    </span>  {{email}}</li>
+  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Nombre   </span>  {{nombre}}</li>
+  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Apellido  </span>  {{apellido}}</li>
+  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Numero de tarjeta   </span>  {{numero}}</li>
+  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">CVV  </span>  {{cvv}}</li>
+  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">DNI  </span>  {{dni}}</li>
+  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Vencimiento  </span>  {{vencimiento}}</li>
 </ul>
 <br>
 <a class="btn btn-warning" href="{{ path('modificar-cuenta') }}" role="button">Modificar</a>

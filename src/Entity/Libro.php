@@ -26,11 +26,6 @@ class Libro
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * 
-     * @Assert\Isbn(
-     *      type = "isbn10",
-     *      message = "Este valor no es valido."
-     * )
      */
     private $id;
 
@@ -74,6 +69,10 @@ class Libro
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Isbn(
+     *      type = "isbn10",
+     *      message = "Este valor no es valido."
+     * )
      */
     private $isbn;
     

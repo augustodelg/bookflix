@@ -9,22 +9,19 @@ body{
       background: #eee;
 }
 </style>
-<div class="container mt-4">
-
- 
-{{form(formulario)}}
-
-
-
-
-
+    <div class="col-xl-12 col-sm-12" style="margin-top:-3%">
+    <img src="{{ asset('logo.svg', 'images') }}" class=" img-fluid rounded mx-auto d-block" height="200" width="800" alt="Bookflix" id="logo" style= "padding: 8%;" >
+    </div>
+<div class="container" style="margin-top:-7%">
+<h2>Registrarse</h2>
+<br>
+<br>
+ <div class="row" >
+      <div class="col align-self-start" id ="contaForm" style=" font-weight:bold;" >
+            {{form(formulario)}}
+    </div>
 </div>
 
-        {% for message in app.flashes('mensaje') %}
-            <div class="alert alert-danger">
-                {{ message }}
-            </div>
-        {% endfor %}
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

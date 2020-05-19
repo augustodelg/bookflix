@@ -1,0 +1,67 @@
+@font-face {
+    font-family: 'Cocogoose';
+    src: url('cocogoose-webfont.woff2') format('woff2'),
+         url('cocogoose-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.container {
+    background-color: #FFEC66;
+    padding: 3% 2.5%;
+    border-radius: 10px
+}
+
+#contaForm {
+    padding: 2% 20%;
+    border-radius: 100px;
+    font-family: 'Cocogoose';
+    font-weight: bold;
+    text-align: center;
+    font-size:25px;
+    text-transform: uppercase;
+    
+}
+
+#fondo{
+    position: absolute;
+    left: 0px;
+    z-index: -1;
+    width: 550px; 
+    height: auto;
+
+}
+
+#registro_email{
+    text-align: center;
+    font-weight: bold;
+    font-family:'Helvetica';
+}
+
+
+#registro_password{
+    text-align: center;
+    font-weight: bold;
+    font-family:'Helvetica';
+}
+
+#registro_nombre{
+    text-align: center;
+    font-weight: bold;
+    font-family:'Helvetica';
+    padding: 10px;
+    font-weight: 600;
+}
+
+#registro_apellido{
+    text-align: center;
+    font-weight: bold;
+    font-family:'Helvetica';
+}
+#registro_Registrar{
+    font-size: 30px;
+    padding: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    
+}
