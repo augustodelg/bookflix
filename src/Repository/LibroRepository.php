@@ -23,7 +23,7 @@ class LibroRepository extends ServiceEntityRepository
     {
         return $this->getEntityManager()->createQuery(
             'SELECT l.foto FROM App:Libro l'
-        )->setMaxResults(5)->getResult();
+        )->setMaxResults(10)->getResult();
     }
 
     // /**
