@@ -18,7 +18,7 @@ easy_admin:
         list:
           fields: ['nombre','libro']
         form:
-          fields: ['nombre','libro']
+          fields: ['nombre']
     Generos:
         class: App\Entity\Genero
         list:
@@ -30,13 +30,13 @@ easy_admin:
         list:
           fields: ['nombre','libros']
         form:
-          fields: ['nombre','libros']
+          fields: ['nombre']
     Libros:
         class: App\Entity\Libro
         list:
-          fields: ['titulo','autor', 'generos', 'editorial', 'ano']
+          fields: ['isbn','titulo','autor', 'generos', 'editorial', 'ano',{ property: 'foto', type: 'image', base_path: '%app.path.libros_images%' },'updatedAt']
         form:
-          fields: ['isbn', 'titulo', { property: 'autor', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Autor' } }, 'generos', 'editorial','ano', 'DESCRIPCION']
+          fields: ['isbn','titulo', { property: 'autor', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Autor' } }, 'generos', 'editorial','ano', 'DESCRIPCION',{ property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.libros_images%'}]
 
   design:
       menu:

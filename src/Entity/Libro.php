@@ -5,9 +5,20 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use DateTime;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LibroRepository")
+ * @UniqueEntity(
+ *      fields={"isbn"},
+ *      message="Ese ISBN ya se encuentra registrado."    
+ * )
+ * @Vich\Uploadable
  */
 class Libro
 {
@@ -15,6 +26,11 @@ class Libro
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * 
+     * @Assert\Isbn(
+     *      type = "isbn10",
+     *      message = "Este valor no es valido."
+     * )
      */
     private $id;
 
@@ -23,10 +39,6 @@ class Libro
      */
     private $titulo;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $isbn;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -47,7 +59,7 @@ class Libro
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Perfil", mappedBy="favoritos")
      */
-    private $perfiles;
+     private $perfiles;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Editorial", inversedBy="libros")
@@ -59,6 +71,28 @@ class Libro
      * @ORM\Column(type="integer", nullable=true)
      */
     private $ano;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $isbn;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $foto;
+
+    /**
+     * @Vich\UploadableField(mapping="libros_images", fileNameProperty="foto")
+     * @var File
+     */
+    private $fotoFile;
+
+     /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
 
 
 
@@ -85,17 +119,6 @@ class Libro
         return $this;
     }
 
-    public function getIsbn(): ?string
-    {
-        return $this->isbn;
-    }
-
-    public function setIsbn(string $isbn): self
-    {
-        $this->isbn = $isbn;
-
-        return $this;
-    }
 
     public function getDescripcion(): ?string
     {
@@ -198,6 +221,56 @@ class Libro
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->titulo;
+    }
+
+    public function getIsbn(): ?string
+    {
+        return $this->isbn;
+    }
+
+    public function setIsbn(string $isbn): self
+    {
+        $this->isbn = $isbn;
+
+        return $this;
+    }
+    public function getFoto(): ?string
+    {
+        return $this->foto;
+    }
+
+    public function setFoto(?string $foto): self
+    {
+        $this->foto = $foto;
+
+        return $this;
+    }
+
+    public function getFotoFile()
+    {
+        return $this->fotoFile;
+    }
+
+    public function setFotoFile(File $foto = null)
+    {
+        $this->fotoFile = $foto;
+
+        if ($foto) {
+
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getUpdatedAt(): ?DateTime
+    {
+        return $this->updatedAt;
+
+    }
+
 
 
 }

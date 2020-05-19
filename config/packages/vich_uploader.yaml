@@ -10,3 +10,9 @@ vich_uploader:
             uri_prefix:         '%app.path.novedades_images%'
             upload_destination: '%kernel.project_dir%/public%app.path.novedades_images%'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
+        libros_images:
+            uri_prefix:         '%app.path.libros_images%'
+            upload_destination: '%kernel.project_dir%/public%app.path.libros_images%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+

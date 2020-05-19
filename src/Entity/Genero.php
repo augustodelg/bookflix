@@ -5,9 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GeneroRepository")
+ * @UniqueEntity(
+ *      fields={"nombre"},
+ *      message="Este genero ya se encuentra registrado."    
+ * )
  */
 class Genero
 {
