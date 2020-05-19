@@ -10,9 +10,12 @@ easy_admin:
     Novedades:
         class: App\Entity\Novedad
         list:
+          actions: ['show',]
           fields: ['titulo', 'DESCRIPCION', { property: 'foto', type: 'image', base_path: '%app.path.novedades_images%' },'updatedAt']
         form:
           fields: ['titulo', 'DESCRIPCION', { property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.novedades_images%'}]
+        show:
+          fields: ['titulo', 'DESCRIPCION', { property: 'foto', type: 'image', base_path: '%app.path.novedades_images%' },'updatedAt' ]
     Autores:
         class: App\Entity\Autor
         list:
