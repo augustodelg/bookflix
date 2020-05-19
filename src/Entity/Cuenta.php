@@ -95,7 +95,7 @@ class Cuenta implements UserInterface
     {
         return $this->nombre;
     }
-
+ 
     public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;

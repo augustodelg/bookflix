@@ -79,7 +79,7 @@ class Perfil
         }
 
         return $this;
-    }
+    } 
 
     public function getCuenta(): ?Cuenta
     {
