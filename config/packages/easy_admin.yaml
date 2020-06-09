@@ -42,7 +42,13 @@ easy_admin:
           fields: ['isbn','titulo','autor', 'generos', 'editorial', 'ano',{ property: 'foto', type: 'image', base_path: '%app.path.libros_images%' },'updatedAt']
         form:
           fields: ['isbn','titulo', { property: 'autor', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Autor' } }, 'generos', 'editorial','ano', 'DESCRIPCION',{ property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.libros_images%'}]
-
+    Adelantos:
+        class: App\Entity\Adelanto
+        list:
+          fields: ['titulo','contenido','libro','updatedAt']
+        form:
+          fields: ['titulo','contenido', { property: 'libro', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Libro' } }]
+  
   design:
       templates:
         new: 'admin/newUpdateBook.html.twig'
@@ -57,6 +63,8 @@ easy_admin:
           - { entity: 'Editoriales', icon: 'warehouse' }
           - { label: 'Libro' }
           - { entity: 'Libros', icon: 'book' }
+          - { label: 'Adelanto' }
+          - { entity: 'Adelantos', icon: 'book-open' }
 
   
 
