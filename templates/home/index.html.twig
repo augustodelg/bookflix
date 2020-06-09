@@ -46,7 +46,7 @@
 <div class="row">
     <div class="col-sm">
       <div class="container-fluid" style= "background: #fff152; padding: 1%; ">
-        <h1  class="display-5" ">Novedades <span class="badge badge-secondary">New</span> </h2>
+        <h1  class="display-5" ">Novedades <span class="badge badge-secondary">New</span></h1>
       </div>
       <div class="container" style= "max-height: 50px;padding: 2%;">
       <ul id="navigation">
@@ -67,6 +67,33 @@
         </div>
         </ul>
       </div>
+
+
+
+      {# <div class="container" style= "max-height: 50px;padding: 2%;">
+      <ul id="navigation">
+      <div class="swiper-container">
+          <div class="swiper-wrapper">
+          {% for i in adelantos %}
+          <div class="swiper-slide">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{i.titulo}}</h5>
+                <p class="card-text">{{i.contenido}}</p>
+                <p class="card-text"><small class="text-muted">{{ i.updated_at }}</small></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+        </div>
+        </ul>
+      </div> #}
+
+
+
+
+
     </div>
 </div>
 

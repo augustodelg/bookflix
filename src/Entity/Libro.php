@@ -93,7 +93,12 @@ class Libro
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Adelanto", mappedBy="libro", cascade={"persist", "remove"})
+     */
+    private $adelanto;
 
+ 
 
     public function __construct()
     {
@@ -268,6 +273,24 @@ class Libro
     {
         return $this->updatedAt;
 
+    }
+
+    public function getAdelanto(): ?Adelanto
+    {
+        return $this->adelanto;
+    }
+
+    public function setAdelanto(?Adelanto $adelanto): self
+    {
+        $this->adelanto = $adelanto;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newLibro = null === $adelanto ? null : $this;
+        if ($adelanto->getLibro() !== $newLibro) {
+            $adelanto->setLibro($newLibro);
+        }
+
+        return $this;
     }
 
 
