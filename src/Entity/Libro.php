@@ -108,6 +108,11 @@ class Libro
      */
     private $capituloLibros;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $cantCapitulos;
+
  
 
     public function __construct()
@@ -343,6 +348,18 @@ class Libro
                 $capituloLibro->setLibro(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCantCapitulos(): ?int
+    {
+        return $this->cantCapitulos;
+    }
+
+    public function setCantCapitulos(?int $cantCapitulos): self
+    {
+        $this->cantCapitulos = $cantCapitulos;
 
         return $this;
     }

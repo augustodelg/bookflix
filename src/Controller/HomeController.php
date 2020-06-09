@@ -20,21 +20,18 @@ class HomeController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $novedades = $em->getRepository(Novedad::class)->novedadesInicio();
+
+            
+
+        $novedades = $em->getRepository(Novedad::class)->NovedadesInicio();
+        $adelantos = $em->getRepository(Adelanto::class)->AdelantosInicio();
         $librosHomePrueba = $em->getRepository(Libro::class)->librosHome();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Home Works!',
             'novedades' => $novedades,
+            'adelantos' => $adelantos,
             'librosPrueba' => $librosHomePrueba]);
 
-        $novedades = $em->getRepository(Novedad::class)->NovedadesInicio();
-        $adelantos = $em->getRepository(Adelanto::class)->AdelantosInicio();
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'Home Works!',
-            'novedades' => $novedades,
-            'adelantos' => $adelantos
-
-        ]);
     }
     /* 
     public function allNovedades(): array 
