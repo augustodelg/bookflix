@@ -37,11 +37,15 @@ easy_admin:
     Libros:
         class: App\Entity\Libro
         list:
+          actions:
+            - { name: 'contenido'}
           fields: ['isbn','titulo','autor', 'generos', 'editorial', 'ano',{ property: 'foto', type: 'image', base_path: '%app.path.libros_images%' },'updatedAt']
         form:
           fields: ['isbn','titulo', { property: 'autor', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Autor' } }, 'generos', 'editorial','ano', 'DESCRIPCION',{ property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.libros_images%'}]
 
   design:
+      templates:
+        new: 'admin/newUpdateBook.html.twig'
       menu:
           - { label: 'Novedad' }
           - { entity: 'Novedades', icon: 'newspaper' }

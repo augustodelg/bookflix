@@ -1,0 +1,72 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+
+{% block title %}Hello UpdateBookController!{% endblock %}
+
+{% block body %}
+<html lang="{{ app.request.locale|split('_')|first|default('en') }}" dir="{{ easyadmin_config('design.rtl') ? 'rtl' : 'ltr' }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp, noimageindex, notranslate, nocache" />
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="generator" content="EasyAdmin" />
+
+        <title>{% block page_title %}{{ block('content_title')|striptags|raw }}{% endblock %}</title>
+
+        {% block head_stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/easyadmin/app.css') }}">
+        {% endblock %}
+
+        {% block head_custom_stylesheets %}
+            {% for css_asset in easyadmin_config('design.assets.css') %}
+                <link rel="stylesheet" href="{{ asset(css_asset) }}">
+            {% endfor %}
+        {% endblock head_custom_stylesheets %}
+
+        {% if easyadmin_config('design.brand_color') != 'hsl(230, 55%, 60%)' %}
+        <style>
+            :root { --color-primary: {{ easyadmin_config('design.brand_color') }}; }
+        </style>
+        {% endif %}
+
+        {% block head_favicon %}
+            {% set favicon = easyadmin_config('design.assets.favicon') %}
+            <link rel="icon" type="{{ favicon.mime_type }}" href="{{ asset(favicon.path) }}" />
+        {% endblock %}
+
+        {% block head_javascript %}
+            <script src="{{ asset('bundles/easyadmin/app.js') }}"></script>
+        {% endblock head_javascript %}
+
+        {% if easyadmin_config('design.rtl') %}
+            <link rel="stylesheet" href="{{ asset('bundles/easyadmin/app.rtl.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/easyadmin/app-custom-rtl.css') }}">
+        {% endif %}
+    </head>
+    {% block wrapper_wrapper %}
+        <div class="wrapper">
+        {% block wrapper %}
+            <header class="main-header">
+                {% block header %}
+                    <nav class="navbar" role="navigation">
+                        <button id="navigation-toggler" type="button" aria-label="Toggle navigation">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+
+                        <div id="header-logo">
+                            {% block header_logo %}
+                                <a class="logo {{ easyadmin_config('site_name')|length > 14 ? 'logo-long' }}" title="{{ easyadmin_config('site_name')|striptags }}" href="{{ path('easyadmin') }}">
+                                    {{ easyadmin_config('site_name')|raw }}
+                                </a>
+                            {% endblock header_logo %}
+                                {{ include('@EasyAdmin/default/menu.html.twig') }}
+                        </div>
+                    </nav>
+                {% endblock %}
+        {% endblock %}
+    {% endblock %}
+
+
+{{dump(libro)}}
+    {{ include('@EasyAdmin/default/includes/_select2_widget.html.twig') }}
+{% endblock %}

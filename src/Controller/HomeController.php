@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Novedad;
+use App\Entity\Libro;
 use App\Repository\NovedadRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,10 +17,12 @@ class HomeController extends AbstractController
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $novedades = $em->getRepository(Novedad::class)->NovedadesInicio();
+        $novedades = $em->getRepository(Novedad::class)->novedadesInicio();
+        $librosHomePrueba = $em->getRepository(Libro::class)->librosHome();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Home Works!',
-            'novedades' => $novedades
+            'novedades' => $novedades,
+            'librosPrueba' => $librosHomePrueba,
         ]);
     }
     /* 

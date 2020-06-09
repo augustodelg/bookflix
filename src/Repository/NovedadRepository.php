@@ -19,7 +19,7 @@ class NovedadRepository extends ServiceEntityRepository
         parent::__construct($registry, Novedad::class);
     }
 
-    public function NovedadesInicio()
+    public function novedadesInicio()
     {
         return $this -> getEntityManager()
 

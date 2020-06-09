@@ -25,6 +25,13 @@ class LibroRepository extends ServiceEntityRepository
             'SELECT l.foto FROM App:Libro l'
         )->setMaxResults(10)->getResult();
     }
+    public function librosHome ()
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT l.foto, l.titulo, l.descripcion FROM App:Libro l'
+        )->setMaxResults(10)->getResult();
+    }
+    
 
     // /**
     //  * @return Libro[] Returns an array of Libro objects

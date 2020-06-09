@@ -1,7 +1,13 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-easy_admin_bundle:
-    resource: '@EasyAdminBundle/Controller/EasyAdminController.php'
-    prefix: /admin
-    type: annotation
+# @EasyAdminBundle/Controller/EasyAdminController.php
+
+# easy_admin_bundle:
+#     resource: '@EasyAdminBundle/Controller/EasyAdminController.php'
+#     prefix: /admin
+#     type: annotation
+
+#update_book:  
+#    controller: App\Controller\UpdateBookController::index
+#    path: /bookUpdate
