@@ -98,12 +98,23 @@ class Libro
      */
     private $adelanto;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $completo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CapituloLibro", mappedBy="libro", orphanRemoval=true)
+     */
+    private $capituloLibros;
+
  
 
     public function __construct()
     {
         $this->generos = new ArrayCollection();
         $this->perfiles = new ArrayCollection();
+        $this->capituloLibros = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -288,6 +299,49 @@ class Libro
         $newLibro = null === $adelanto ? null : $this;
         if ($adelanto->getLibro() !== $newLibro) {
             $adelanto->setLibro($newLibro);
+        }
+
+        return $this;
+    }
+
+    public function getCompleto(): ?bool
+    {
+        return $this->completo;
+    }
+
+    public function setCompleto(bool $completo): self
+    {
+        $this->completo = $completo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CapituloLibro[]
+     */
+    public function getCapituloLibros(): Collection
+    {
+        return $this->capituloLibros;
+    }
+
+    public function addCapituloLibro(CapituloLibro $capituloLibro): self
+    {
+        if (!$this->capituloLibros->contains($capituloLibro)) {
+            $this->capituloLibros[] = $capituloLibro;
+            $capituloLibro->setLibro($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCapituloLibro(CapituloLibro $capituloLibro): self
+    {
+        if ($this->capituloLibros->contains($capituloLibro)) {
+            $this->capituloLibros->removeElement($capituloLibro);
+            // set the owning side to null (unless already changed)
+            if ($capituloLibro->getLibro() === $this) {
+                $capituloLibro->setLibro(null);
+            }
         }
 
         return $this;

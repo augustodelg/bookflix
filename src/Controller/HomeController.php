@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Home Works!',
             'novedades' => $novedades,
-            'librosPrueba' => $librosHomePrueba,
+            'librosPrueba' => $librosHomePrueba]);
 
         $novedades = $em->getRepository(Novedad::class)->NovedadesInicio();
         $adelantos = $em->getRepository(Adelanto::class)->AdelantosInicio();
