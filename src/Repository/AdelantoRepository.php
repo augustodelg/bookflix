@@ -24,7 +24,7 @@ class AdelantoRepository extends ServiceEntityRepository
         return $this -> getEntityManager()
 
         ->createQuery(
-            'SELECT a.titulo , a.contenido
+            'SELECT a.titulo , a.contenido , a.id
             FROM App:Adelanto a '
         )->getResult();
     }

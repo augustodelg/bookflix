@@ -106,7 +106,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
     </form>
     <ul class="navbar-nav ">
     <li class="nav-item active">
@@ -123,9 +123,7 @@
 <div class="row">
     <div class="col-sm">
       <div class="container-fluid" style= "background: #fff152; padding: 1%; ">
-
-        <h1  class="display-5" >Novedades <span class="badge badge-secondary">New</span> </h1>
-
+        <h1  class="display-5" >Novedades <span class="badge badge-secondary">Ultimas</span> </h1>
       </div>
       <div class="container" style= "padding: 2%;">
         <ul id="navigation">
@@ -146,12 +144,14 @@
             </div>
         </ul>
       </div>
+    </div>
+  </div>
 
 <br>
-<div class="row" style="margin-bot:10px">
+<div class="row" style="margin-top:20px">
     <div class="col-sm">
       <div class="container-fluid" style= "background: #fff152; padding: 1%; ">
-        <h1  class="display-5">Adelantos <span class="badge badge-secondary">New</span></h1>
+        <h1  class="display-5">Adelantos <span class="badge badge-secondary">Ultimos</span></h1>
       </div>
       <div class="container" style= "max-height: 50px;padding: 2%;">
       <ul id="navigation">
@@ -162,27 +162,28 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">{{i.titulo}}</h5>
-                <p class="card-text">{{i.contenido}}</p>
+                <p class="card-text" style="text-overflow: ellipsis;white-space: nowrap ; overflow:hidden " >{{i.contenido}}</p>
+                <a class="btn btn-warning" style="display:block ; margin:auto" href="{{ path('adelanto', {id: i.id}) }}">Ver adelanto <span class="sr-only">(current)</span></a>
+
                 {# <p class="card-text"><small class="text-muted">{{ i.updated_at }}</small></p> #}
               </div>
             </div>
           </div>
           {% endfor %}
           </div>
-        </div>
-        </ul>
       </div>
+      </ul>
     </div>
-    </div>
+  </div>
+</div>
 
   <!-- LIBROS -->
-</div> 
-  </div>
-<div class="row">
+<div class="row" style="margin-top:200px ; margin-bottom:500px">
   <div class="col-sm">
       <div class="container-fluid" style= "background: #fff152; padding: 1%; ">
         <h1  class="display-5" >Libros <span class="badge badge-secondary">Recomendados</span> </h1>
       </div>
+      <div class="container" style= "max-height: 50px;padding: 2%;">
       <ul id="navigation">
       <div class="swiper-container">
                 <div class="swiper-wrapper">
@@ -202,6 +203,9 @@
                 </div> 
         </div>
       </ul>
+    </div>
+  </div>
+</div>
 
   <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/js/swiper.js"></script>

@@ -96,6 +96,4 @@ class Adelanto
         return $this->updatedAt;
 
     }
-
-
 }
