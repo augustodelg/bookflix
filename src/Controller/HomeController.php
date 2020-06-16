@@ -48,8 +48,9 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('buscando_libro',[
                 'texto'=>$busqueda['textoBusqueda'],
                 'criterio'=>$busqueda['ElegirCriterio']
-                ]) ;
+                ]);
             }
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Home Works!',
             'novedades' => $novedades,

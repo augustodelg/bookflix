@@ -28,7 +28,7 @@ class LibroRepository extends ServiceEntityRepository
     public function librosHome ()
     {
         return $this->getEntityManager()->createQuery(
-            'SELECT l.foto, l.titulo, l.descripcion FROM App:Libro l'
+            'SELECT l.foto, l.titulo, l.descripcion, l.id FROM App:Libro l'
         )->setMaxResults(10)->getResult();
     }
     

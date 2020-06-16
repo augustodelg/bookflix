@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bookflix - {{libro.titulo}}{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<img src="{{ asset('logo.svg', 'images') }}" width="300" height="30" class="d-inline-block align-top" alt="">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
+      </li>
+    
+
+      
+    </ul>
+
+    {% embed 'prueba/formulario-prueba.html.twig' %}
+    {% endembed %}
+{# 
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+    </form> #}
+    <ul class="navbar-nav ">
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path('perfil') }}">Cuenta <span class="sr-only">(current)</span></a>
+    </li>
+    </ul> 
+    <ul class="navbar-nav ">
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
+    </li>
+    </ul> 
+  </div>
+</nav>
+
+
+<div class="container-fluid" style= "background: #fff152; padding: 1%; ">
+    <h1  class="display-5" >Libro</h1>
+</div>
+
+
+
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-9">
+            <h1 style="text-align:center">{{libro.titulo}}</h1>
+            <br>
+            <p style="font-size:20px ; text-align:center">
+            {{libro.descripcion}}
+            </p>
+            <ul class="list-group">
+                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Autor</span>  {{libro.autor}}</li>
+                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Genero</span>
+                    {% for i in libro.generos %}
+                        {{i.nombre}},
+                    {% endfor %}    
+                </li>
+                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Año</span>  {{libro.ano}}</li>
+                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Editorial</span>  {{libro.editorial}}</li>
+                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">ISBN</span>  {{libro.ISBN}}</li>
+            </ul>
+            <br>
+            <a style= "margin: auto ; display:block ; max-width:70px" class="btn btn-warning">Leer</a>
+            {# <h4 style="text-align: left ; margin-top:5px">{{libro.autor}}</h4>
+            <h5 style="text-align: left">Editoral {{libro.editorial}}</h5> #}
+        </div>
+        <div class="col-3">
+              <img style = "width:auto; height:auto; max-width:300px; max-height:450px; display:block ; margin:auto" src="/uploads/images/portadas/{{libro.foto}}">
+
+        </div>
+    </div>
+</div>
+<br>
+<div style="margin:auto ; width:65%">
+<hr>
+</div>
+<br>
+<a class="btn btn-warning" style="display:block ; margin:auto ; max-width:80px" href="{{ path('home') }}">Volver</a>
+</div>
+
+{% endblock %}

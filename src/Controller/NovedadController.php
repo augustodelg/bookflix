@@ -1,38 +1,36 @@
 <?php
+
 namespace App\Controller;
 
-use App\Entity\Novedad;
-use App\Entity\Libro;
-use App\Repository\NovedadRepository;
-use App\Entity\Adelanto;
-use App\Repository\AdelantoRepository;
-use App\Repository\LibroRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Libro;
+
+use App\Entity\Adelanto;
+use App\Entity\Novedad;
+use App\Repository\NovedadRepository;
+use App\Repository\AdelantoRepository;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class BuscarLibroController extends AbstractController
+class NovedadController extends AbstractController
 {
     /**
-     * @Route ("/home/buscar/{texto}/{criterio}", name="buscando_libro")
-     * @param LibroRepository $libroRepository
+     * @Route("/novedad", name="novedad")
      */
-    public function buscarLibro(LibroRepository $libroRepository, $texto, $criterio , Request $request)
+    public function index( Request $request )
     {
 
+        $data=$request->query->get('id');
 
         $em = $this->getDoctrine()->getManager();
-
-
-
 
         $novedades = $em->getRepository(Novedad::class)->NovedadesInicio();
         $adelantos = $em->getRepository(Adelanto::class)->AdelantosInicio();
         $librosHomePrueba = $em->getRepository(Libro::class)->librosHome();
+
         $defaultData = ['mensaje' => 'Busque su libro aqui'];
         $form = $this->createFormBuilder($defaultData)
             ->add('textoBusqueda', TextType::class)
@@ -46,7 +44,9 @@ class BuscarLibroController extends AbstractController
                 ])
         ->add('Buscar',SubmitType::class)
         ->getForm();
+
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid())
         {
            $busqueda = $form->getData();
@@ -54,16 +54,14 @@ class BuscarLibroController extends AbstractController
                 'texto'=>$busqueda['textoBusqueda'],
                 'criterio'=>$busqueda['ElegirCriterio']
                 ]);
-            }
+            }        
+
+        $novedad = $em->getRepository(Novedad::class)->findOneBy(array('id' => $data));
 
 
-
-
-        $libros = $libroRepository->buscarLibro($texto,$criterio);
-        return $this->render('resultadosBusqueda.html.twig',[
-            'libros'=>$libros,
-            'myForm' => $form->createView()
+        return $this->render('novedad/index.html.twig', [
+            'myForm' => $form->createView(),
+            'novedad' => $novedad
         ]);
-
     }
 }

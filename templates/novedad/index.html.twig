@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bookflix - {{adelanto.titulo}} {% endblock %}
+{% block title %}Bookflix - {{novedad.titulo}}{% endblock %}
 
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <img src="{{ asset('logo.svg', 'images') }}" width="300" height="30" class="d-inline-block align-top" alt="">
 
@@ -26,10 +24,9 @@
       
     </ul>
 
-   {% embed 'prueba/formulario-prueba.html.twig' %}
+    {% embed 'prueba/formulario-prueba.html.twig' %}
     {% endembed %}
-
-{#     
+{# 
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
@@ -47,30 +44,48 @@
   </div>
 </nav>
 
+
+
 <div class="container-fluid" style= "background: #fff152; padding: 1%; ">
-    <h1  class="display-5" >Adelantos</h1>
+    <h1  class="display-5" >Novedad</h1>
 </div>
-
-<div class="container" style="margin-top:50px ; margin-bottom:50px;">
-
-{% if foto != null   %}
-  <img style = "width:auto; height:auto; max-width:300px; max-height:450px; display:block ; margin:auto" src="/uploads/images/portadas/{{foto}}">
-{% endif  %}
 <br>
-<h1 style="text-align:center">{{adelanto.titulo}}</h1>
-<hr>
-<p style="text-align:left ; margin-top:30px">{{adelanto.contenido}}</p>
 
-<hr>
+{% if novedad.foto != null %}
 
+<div class="container">
+    <div class="row">
+        <div class="col-9">
+            <h1 style="text-align:center">{{novedad.titulo}}</h1>
+            <br>
+            <p style="font-size:20px ; text-align:center">
+            {{novedad.descripcion}}
+            </p>
+                      {# <h4 style="text-align: left ; margin-top:5px">{{libro.autor}}</h4>
+            <h5 style="text-align: left">Editoral {{libro.editorial}}</h5> #}
+        </div>
+        <div class="col-3">
+              <img style = "width:auto; height:auto; max-width:300px; max-height:450px; display:block ; margin:auto" src="/uploads/images/novedades/{{novedad.foto}}">
 
-{# {% if foto == null   %}
-  <h2>Este adelanto no tiene libro</h2>
-{% else  %}
-  <img style = "width:auto; height:auto; max-width:300px; max-height:450px;" src="/uploads/images/portadas/{{foto}}">
-{% endif  %} #}
-
-<a class="btn btn-warning" style="display:block ; margin:auto ; max-width:80px" href="{{ path('home') }}">Volver</a>
+        </div>
+    </div>
 </div>
+
+{% else %}
+
+<div class="container">
+              <h1 style="text-align:center">{{novedad.titulo}}</h1>
+            <br>
+            <p style="font-size:20px ; text-align:center">
+            {{novedad.descripcion}}
+            </p>
+</div>
+
+{% endif %}
+<div style="display: block ; margin:auto ; width:70% ">
+<br>
+<hr>
+</div>
+<a class="btn btn-warning" style="display:block ; margin:auto ; max-width:80px" href="{{ path('home') }}">Volver</a>  
 
 {% endblock %}

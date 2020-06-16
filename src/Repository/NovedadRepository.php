@@ -24,7 +24,7 @@ class NovedadRepository extends ServiceEntityRepository
         return $this -> getEntityManager()
 
         ->createQuery(
-            'SELECT n.titulo, n.descripcion, n.foto
+            'SELECT n.titulo, n.descripcion, n.foto, n.id
             FROM App:Novedad n '
         )->getResult();
     }

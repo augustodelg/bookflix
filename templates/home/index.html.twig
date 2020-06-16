@@ -139,6 +139,8 @@
                         <div class="card-body">
                           <h5 class="card-title" style= "font-weight: bold;">{{ i.titulo }}</h5>
                             <p class="card-text" id = "text-cut">{{i.descripcion}}</p>
+                            <a class="btn btn-warning" style="display:block ; margin:auto" href="{{ path('novedad', {id: i.id}) }}">Ver novedad <span class="sr-only">(current)</span></a>
+
                         </div>
                     </div>
                   </div>
@@ -198,6 +200,9 @@
                                 <div class="descriptionsBook">
                                   <h1>{{ i.titulo }}</h1>
                                   <p>{{i.descripcion}}</p>
+                                  <a href = "{{ path('libro', {id: i.id}) }}" class="btn btn-warning" style="margin-bottom:20px ; display:block ; margin:auto ; position:absolute ; bottom:40px ; width:90px">
+                                      Ver
+                                  </a>
                                 </div>
                               </div>
                             </div>
