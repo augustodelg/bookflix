@@ -32,6 +32,35 @@ class LibroRepository extends ServiceEntityRepository
         )->setMaxResults(10)->getResult();
     }
     
+    public function buscarLibro($texto, $criterio)
+    {   
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('l')
+            ->from('App\Entity\Libro','l');
+
+        switch ($criterio) {
+            case "titulo":
+                $qb->andWhere( $qb->expr()->like('l.titulo', ':search') );
+                break;
+            case "autor":
+                $qb->innerJoin('l.autor','au')->andWhere($qb->expr()->like('au.nombre', ':search'));
+                break;
+            case "editorial":
+                $qb->innerJoin('l.editorial','ed')->andWhere($qb->expr()->like('ed.nombre', ':search'));
+                break;
+        } 
+
+         $qb->setParameter('search', '%'.$texto.'%');
+                
+         $qb->orderBy('l.titulo','ASC');
+
+        return $qb->getQuery()->execute(); //ejecuto el query        
+
+
+    }
+
+
 
     // /**
     //  * @return Libro[] Returns an array of Libro objects

@@ -47,7 +47,7 @@ easy_admin:
         list:
           fields: ['titulo','contenido','libro','updatedAt']
         form:
-          fields: ['titulo','contenido', { property: 'libro', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Libro' } }]
+          fields: ['titulo', { property: 'contenido', type: 'textarea' }, { property: 'libro', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Libro' } }]
   
   design:
       templates:

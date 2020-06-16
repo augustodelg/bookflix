@@ -1,3 +1,4 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Bookflix{% endblock %}
@@ -98,18 +99,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
     
-
-      
     </ul>
-  <!--  <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-    </form>-->
-    {% embed 'prueba/formulario-prueba.html.twig' %}
-    {% endembed %}
 
     <ul class="navbar-nav ">
     <li class="nav-item active">
@@ -123,81 +116,28 @@
     </ul> 
   </div>
 </nav>
+
+ <!-- LIBROS -->
+</div> 
+  </div>
 <div class="row">
-    <div class="col-sm">
-      <div class="container-fluid" style= "background: #fff152; padding: 1%; ">
-        <h1  class="display-5" >Novedades <span class="badge badge-secondary">Ultimas</span> </h1>
-      </div>
-      <div class="container" style= "padding: 2%;">
-        <ul id="navigation">
-          <div class="swiper-container">
-              <div class="swiper-wrapper">
-                {% for i in novedades %}
-                <div class="swiper-slide">
-                  <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" style = "width:auto; height:auto; max-width:300px; max-height:450px;" src="/uploads/images/novedades/{{i.foto}}" alt="Card image cap" >
-                        <div class="card-body">
-                          <h5 class="card-title" style= "font-weight: bold;">{{ i.titulo }}</h5>
-                            <p class="card-text" id = "text-cut">{{i.descripcion}}</p>
-                        </div>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-<br>
-<div class="row" style="margin-top:20px">
-    <div class="col-sm">
-      <div class="container-fluid" style= "background: #fff152; padding: 1%; ">
-        <h1  class="display-5">Adelantos <span class="badge badge-secondary">Ultimos</span></h1>
-      </div>
-      <div class="container" style= "max-height: 50px;padding: 2%;">
-      <ul id="navigation">
-      <div class="swiper-container">
-          <div class="swiper-wrapper">
-          {% for i in adelantos %}
-          <div class="swiper-slide">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{i.titulo}}</h5>
-                <p class="card-text" style="text-overflow: ellipsis;white-space: nowrap ; overflow:hidden " >{{i.contenido}}</p>
-                <a class="btn btn-warning" style="display:block ; margin:auto" href="{{ path('adelanto', {id: i.id}) }}">Ver adelanto <span class="sr-only">(current)</span></a>
-
-                {# <p class="card-text"><small class="text-muted">{{ i.updated_at }}</small></p> #}
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-          </div>
-      </div>
-      </ul>
-    </div>
-  </div>
-</div>
-
-  <!-- LIBROS -->
-<div class="row" style="margin-top:200px ; margin-bottom:500px">
   <div class="col-sm">
       <div class="container-fluid" style= "background: #fff152; padding: 1%; ">
-        <h1  class="display-5" >Libros <span class="badge badge-secondary">Recomendados</span> </h1>
+        <h1  class="display-5" >Resultados <span class="badge badge-secondary">Busqueda</span> </h1>
       </div>
-      <div class="container" style= "max-height: 50px;padding: 2%;">
       <ul id="navigation">
       <div class="swiper-container">
                 <div class="swiper-wrapper">
-                  {% for i in librosPrueba %}
+                  {% for i in libros %}
                     <div class="swiper-slide">
                             <div class="wrapper">
                               <div class="cardBook">
                                 <img style = "width:auto; height:auto; max-width:300px; max-height:450px;" src="/uploads/images/portadas/{{i.foto}}">
                                 <div class="descriptionsBook">
                                   <h1>{{ i.titulo }}</h1>
-                                  <p>{{i.descripcion}}</p>
+                                  <p>{{i.autor}}</p>
+                                   <p>{{i.editorial}}</p>
+                                    <p>{{i.descripcion}}</p>
                                 </div>
                               </div>
                             </div>
@@ -206,9 +146,6 @@
                 </div> 
         </div>
       </ul>
-    </div>
-  </div>
-</div>
 
   <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/js/swiper.js"></script>
@@ -227,8 +164,4 @@
     });
   </script>
 {% endblock %}
-
-
-
-
 
