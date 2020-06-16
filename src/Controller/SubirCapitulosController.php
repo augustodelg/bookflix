@@ -43,7 +43,8 @@ class SubirCapitulosController extends AbstractController
         $form->handleRequest($request);
 
         if ($form-> isSubmitted() && $form-> isValid()) {
-            if ($form->get('completo')) {
+
+            if ($form->get('completo')->getData()) {
                 $libro-> setCompleto(true);
             }
             $em-> persist($cap);
