@@ -4,18 +4,16 @@ namespace App\Controller;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 use App\Entity\Libro;
-
-
+use Symfony\Component\Yaml\Dumper;
 
 class AdminControllerBookflix extends EasyAdminController
 {
 
-    protected function contenidoAction(){
+    protected function CargarPdfAction(){
         
-        $id = $this->request->query->get('id');
-        $entity = $this->em->getRepository(Libro::class)->find($id);
+        $entity = $this->request->query;
 
-        return $this-> redirectToRoute('update_book', array('id' => $id));
+        return $this-> redirectToRoute('update_book', array('id' =>  $entity->get('id'),'entity' => $entity));
 
     }
 }

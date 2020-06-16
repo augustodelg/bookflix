@@ -104,7 +104,7 @@ class Libro
     private $completo;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CapituloLibro", mappedBy="libro", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\CapituloLibro", mappedBy="libro", orphanRemoval=true, cascade={"persist"})
      */
     private $capituloLibros;
 
@@ -113,6 +113,11 @@ class Libro
      */
     private $cantCapitulos;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $tipoDeCarga;
+    // INDICA COMO SE SUBE EL LIBRO true = libro completo  --  false = por capitulo
  
 
     public function __construct()
@@ -120,6 +125,7 @@ class Libro
         $this->generos = new ArrayCollection();
         $this->perfiles = new ArrayCollection();
         $this->capituloLibros = new ArrayCollection();
+        $this->completo=false ;
     }
 
     public function getId(): ?int
@@ -360,6 +366,18 @@ class Libro
     public function setCantCapitulos(?int $cantCapitulos): self
     {
         $this->cantCapitulos = $cantCapitulos;
+
+        return $this;
+    }
+
+    public function getTipoDeCarga(): ?bool
+    {
+        return $this->tipoDeCarga;
+    }
+
+    public function setTipoDeCarga(?bool $tipoDeCarga): self
+    {
+        $this->tipoDeCarga = $tipoDeCarga;
 
         return $this;
     }

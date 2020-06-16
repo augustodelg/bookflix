@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      message="Este autor ya se encuentra registrado."    
  * )
  */
+
 class Autor
 {
     /**

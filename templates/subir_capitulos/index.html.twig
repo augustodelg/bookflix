@@ -169,14 +169,32 @@
                         {% endblock content_header_wrapper %}
 
                         <section id="main" class="content-body">
-                            {% block main %}
-                                    <div class="row justify-content-md-center">
-                                        <div class="col-5">
+                            {% block main %}    
 
-                                                        {{form(formulario)}}
+                                    {% if completo == true %}
 
-                                        </div>
-                                    </div>
+                                            <div class="alert alert-success" role="alert">
+                                                El libro ya se escuentra completo!
+                                            </div>
+
+                                    {% else %}
+                                        
+                                            {{ form_start(formulario) }}
+                                                <div class="col">
+                                                            <div class="panel panel-warning">
+                                                                <div class="panel-heading">
+                                                                </div>
+                                                                    <div class="panel-body">
+                                                                    {{form(formulario)}}
+                                                                </div>
+                                                                <div class="panel-footer"></div>
+                                                            </div> 
+                                            </div>
+                                            </ul>
+                                            {{ form_end(formulario) }}
+                                            </div>
+                                    {% endif %}
+
 
     
                             

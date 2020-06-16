@@ -6,6 +6,8 @@
 parameters:
     app.path.novedades_images: /uploads/images/novedades
     app.path.libros_images: /uploads/images/portadas
+    app.path.capitulo_file: /uploads/pdf
+    #podriamos orgnaizar esto subiendo todo lo de un libro en una carpeta libro y separar en portada y pdf, y si se puede agregar una forma de crear uan carpeta por libro.
 
 services:
     # default configuration for services in *this* file
