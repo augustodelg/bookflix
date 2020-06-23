@@ -1,5 +1,5 @@
 # Bookflix - Ingenieria de Software 2
-Proyecto Objetos 2 UNLP INFORMATICA
+UNLP INFORMATICA
 ### ALUMNOS 
 * German Velazquez
 * Emiliano Asprea
