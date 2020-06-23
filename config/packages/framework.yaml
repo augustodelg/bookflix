@@ -25,4 +25,5 @@ framework:
                 base_path: 'font'
             js:
                 base_path: 'build/js'
-    
+            pdf:
+                base_path: 'pdf'

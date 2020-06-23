@@ -60,10 +60,13 @@ class BuscarLibroController extends AbstractController
 
 
         $libros = $libroRepository->buscarLibro($texto,$criterio);
+        $cantidad = count($libros);
         return $this->render('resultadosBusqueda.html.twig',[
             'libros'=>$libros,
-            'myForm' => $form->createView()
+            'myForm' => $form->createView(),
+            'cantidad'=>$cantidad
         ]);
 
     }
+
 }

@@ -46,20 +46,18 @@
 </nav>
 
 
-<div class="container-fluid" style= "background: #fff152; padding: 1%; ">
-    <h1  class="display-5" >Libro</h1>
-</div>
+<br>
 
 
 
 
 <br>
-<div class="container">
+<div class="container" style = "background: #FFF7A0 ; border-radius: 1.5% ; padding:6%">
     <div class="row">
         <div class="col-9">
-            <h1 style="text-align:center">{{libro.titulo}}</h1>
+            <h1 style="text-align:center; text-transform: uppercase;font-family: Asap Condensed" >{{libro.titulo}}</h1>
             <br>
-            <p style="font-size:20px ; text-align:center">
+            <p style="font-size:20px ; text-align:center;font-family: Noto Sans KR">
             {{libro.descripcion}}
             </p>
             <ul class="list-group">
@@ -74,8 +72,54 @@
                 <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">ISBN</span>  {{libro.ISBN}}</li>
             </ul>
             <br>
-            <a style= "margin: auto ; display:block ; max-width:70px" class="btn btn-warning">Leer</a>
-            {# <h4 style="text-align: left ; margin-top:5px">{{libro.autor}}</h4>
+            {% if libro.tipoDeCarga == true %}
+
+                  <div class="row">
+                    <a style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+                  {% if libro.capituloLibros[0].fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
+                    <h5 style= "font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{ libro.capituloLibros[0].fechaDisponible|date('Y-m-d') }} </h1>
+                  </div>
+                  {% endif %}
+            {% else %}
+              
+              {% if libro.completo %}
+                <div class="row">
+                  
+               
+                <a style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+
+                {% set fechaDisp = 'ok' %}
+                {% for capitulo in libro.capituloLibros  %}
+                  {% if capitulo.fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
+                    {% set fechaDisp = capitulo.fechaDisponible|date('Y-m-d') %}
+                  {% endif %}
+                {% endfor %}
+                {% if fechaDisp is not same as('ok')  %}
+                   <h5 style= "font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{fechaDisp}} </h1>
+                {% endif %}
+
+              
+                </div>
+                {% endif %}
+                {% if libro.capituloLibros|length > 0 %}
+                  {% for capitulo in libro.capituloLibros %}
+                  <div class="row">
+                    
+                    
+                    <a style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Leer capitulo {{capitulo.nro}}</a>
+                    {% if capitulo.fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
+                      <h5 style= "font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{ capitulo.fechaDisponible|date('Y-m-d') }} </h1>
+                    {% endif %}
+
+                  </div>
+                    
+              
+                  {% endfor %}
+                {% endif %}
+              
+            {% endif %}
+            
+             {#<h4 style="text-align: left ; margin-top:5px">{{libro.autor}}</h4>
             <h5 style="text-align: left">Editoral {{libro.editorial}}</h5> #}
         </div>
         <div class="col-3">
@@ -91,5 +135,7 @@
 <br>
 <a class="btn btn-warning" style="display:block ; margin:auto ; max-width:80px" href="{{ path('home') }}">Volver</a>
 </div>
+<br>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.js"></script>
 
 {% endblock %}

@@ -41,7 +41,7 @@ class CapituloLibro
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\GreaterThan("today",message= "Fecha de lanzamiento invalida")
+     * @Assert\GreaterThanOrEqual("today",message= "Fecha de lanzamiento invalida")
      */
     private $fechaDisponible;
 

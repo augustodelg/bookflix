@@ -11,9 +11,16 @@ use App\Entity\Adelanto;
 use App\Entity\Novedad;
 use App\Repository\NovedadRepository;
 use App\Repository\AdelantoRepository;
+use App\Repository\CapituloLibroRepository;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\DependencyInjection\Argument\ServiceLocator;
+
+use Symfony\Component\Finder\Finder;
 
 
 
@@ -64,5 +71,18 @@ class LibroController extends AbstractController
             'libro' => $libro,
             'myForm' => $form->createView(),
         ]);
+    }
+
+     /**
+     * @Route("/libro/pdf/{id}", name="libro_pdf")
+     */
+    public function pdf($id ,Request $request )
+    {
+
+        $response = new BinaryFileResponse( asset('/') ) ;
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $id);
+        return $response;
     }
 }

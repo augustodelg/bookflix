@@ -35,6 +35,22 @@ class LibroRepository extends ServiceEntityRepository
     public function buscarLibro($texto, $criterio)
     {   
         $em = $this->getEntityManager();
+
+        if ($criterio == 'genero')
+        {
+            $generos = $em->createQuery(
+                "SELECT g.id 
+                from App\Entity\Genero g 
+                where g.nombre like '%$texto%'")->getResult();
+
+                $qb = $this->createQueryBuilder('l')
+                ->innerJoin('l.generos','gen');
+                $qb->andWhere('gen in (:generos)')
+                    ->setParameters( array('generos' => $generos));
+
+                return $qb->getQuery()->getResult();
+        }
+
         $qb = $em->createQueryBuilder();
         $qb->select('l')
             ->from('App\Entity\Libro','l');

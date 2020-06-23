@@ -130,6 +130,9 @@
       </div>
       <ul id="navigation">
       <div class="swiper-container">
+                {% if cantidad == 0 %}
+                     <h1>No se encontraron resultados para su busqueda</h1>
+                  {% endif %}
                 <div class="swiper-wrapper">
                   {% for i in libros %}
                     <div class="swiper-slide">
@@ -138,11 +141,13 @@
                                 <img style = "width:auto; height:auto; max-width:300px; max-height:450px;" src="/uploads/images/portadas/{{i.foto}}">
                                 <div class="descriptionsBook">
                                   <h1>{{ i.titulo }}</h1>
-                                  <p>{{i.autor}}</p>
-                                   <p>{{i.editorial}}</p>
-                                    <p>{{i.descripcion}}</p>
+                                  <p>{{i.descripcion}}</p>
+                                  <a href = "{{ path('libro', {id: i.id}) }}" class="btn btn-warning" style="margin-bottom:20px ; display:block ; margin:auto ; position:absolute ; bottom:40px ; width:90px">
+                                      Ver
+                                  </a>
                                 </div>
                               </div>
+
                             </div>
                     </div>
                   {% endfor %}
