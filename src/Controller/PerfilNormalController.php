@@ -16,27 +16,12 @@ class PerfilNormalController extends AbstractController
      */
     public function index()
     {
-
-
-
-
-
-
-
-
-
-
-
-
-
          $em = $this->getDoctrine()->getManager();
          $user = $this->getUser();
          $user->setPremium(false);
          $em->persist($user);
          $em->flush();
         return new RedirectResponse('home');
-
-
 
 
         // return $this->render('perfil_normal/index.html.twig', [

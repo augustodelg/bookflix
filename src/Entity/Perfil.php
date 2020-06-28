@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Perfil
 {
     /**
-     * @ORM\Id()
+     * @ORM\Id() 
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
@@ -32,6 +32,11 @@ class Perfil
      * @ORM\ManyToOne(targetEntity="App\Entity\Cuenta", inversedBy="perfiles")
      */
     private $cuenta;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $activo;
 
     public function __construct()
     {
@@ -89,6 +94,18 @@ class Perfil
     public function setCuenta(?Cuenta $cuenta): self
     {
         $this->cuenta = $cuenta;
+
+        return $this;
+    }
+
+    public function getActivo(): ?bool
+    {
+        return $this->activo;
+    }
+
+    public function setActivo(bool $activo): self
+    {
+        $this->activo = $activo;
 
         return $this;
     }

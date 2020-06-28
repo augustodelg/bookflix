@@ -2,38 +2,48 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Novedad;
 use App\Entity\Libro;
 use App\Entity\Adelanto;
 use App\Repository\NovedadRepository;
 use App\Repository\AdelantoRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Persistence\ManagerRegistry;   
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class HomeController extends AbstractController
+class VerPerfilesController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("perfiles", name="ver_perfiles")
      */
     public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
+
         $user = $this->getUser();
-
         $perfiles = $user->getPerfiles();
-        $perfil = $user->getPerfilActivo();
+        $cantPerfiles = 0;
+        $plan = $user->getPremium();
 
-        $perfilActivo = $perfiles[$perfil];
+        foreach ($user->getPerfiles() as $perfil){
+            if ($perfil->getActivo()==true){
+                $perfilActivo=$perfil;
+            }
+            $cantPerfiles=$cantPerfiles+1;
+        }
+
+        $posActivo = $user->getPerfilActivo();   //Me traigo la posicion en la coleccion del perfil activo
+
+        $coleccionPerfilActivo = $user->getPerfiles();
+        $perfilActivo = $coleccionPerfilActivo[$posActivo];
 
 
 
- 
         $novedades = $em->getRepository(Novedad::class)->NovedadesInicio();
         $adelantos = $em->getRepository(Adelanto::class)->AdelantosInicio();
         $librosHomePrueba = $em->getRepository(Libro::class)->librosHome();
@@ -60,26 +70,17 @@ class HomeController extends AbstractController
                 ]);
             }
 
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'Home Works!',
-            'novedades' => $novedades,
-            'adelantos' => $adelantos,
-            'librosPrueba' => $librosHomePrueba,
+
+
+        return $this->render('ver_perfiles/index.html.twig', [
+            'controller_name' => 'VerPerfilesController',
+            'perfiles' => $perfiles,
             'myForm'=>$form->createView(),
-            'perfilActivo' => $perfilActivo
-            ]);
-    }
+            'posActivo'=>$posActivo,
+            'perfilActivo' => $perfilActivo,
+            'cantPerfiles' => $cantPerfiles,
+            'plan' => $plan,
 
-    // <!--{{ //include('prueba/formulario-prueba.html.twig',{myForm:myForm}) }}-->
-    /* 
-    public function allNovedades(): array 
-    {
-        $em = $this->getDoctrine()->getManager();
-        
-        $query = $em->getRepository(Novedad::class)->findAll();
-
-        // returns an array of Product objects
-        return $query;
+        ]);
     }
-   */
 }

@@ -11,8 +11,6 @@ use App\Entity\Cuenta;
 use App\Entity\Perfil;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -22,11 +20,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Entity\Tarjeta;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
-
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -135,7 +130,9 @@ class RegistroController extends AbstractController
             }
 
 
-            $perfil->setNombre($data['nombre']);         
+            $perfil->setNombre($data['nombre']);
+            $perfil->setActivo(true);
+            $user->setPerfilActivo(0);
             $user->addPerfile($perfil);
 
             $em->persist($perfil);
