@@ -5,6 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 use App\Entity\Cuenta;
 use App\Entity\Perfil;
 
@@ -13,7 +19,7 @@ class PerfilController extends AbstractController
     /**
      * @Route("/perfil", name="perfil")
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = $this->getUser();
         $email = $user->getEmail();
@@ -27,6 +33,38 @@ class PerfilController extends AbstractController
         $newDate = $vencimiento->format('Y-m-d');
 
 
+        $defaultData = ['mensaje' => 'Busque su libro aqui'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('textoBusqueda', TextType::class)
+             ->add('ElegirCriterio', ChoiceType::class,[
+                'choices'=> [
+                    'Autor'=>'autor',
+                    'Genero'=>'genero',
+                    'Editorial'=>'editorial',
+                    'Titulo'=>'titulo',
+                    ],
+                ])
+        ->add('Buscar',SubmitType::class)
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+           $busqueda = $form->getData();
+            return $this->redirectToRoute('buscando_libro',[
+                'texto'=>$busqueda['textoBusqueda'],
+                'criterio'=>$busqueda['ElegirCriterio']
+                ]);
+            }
+
+        //Obtener perfil actual
+        $user = $this->getUser();
+        $perfiles = $user->getPerfiles();
+        $perfil = $user->getPerfilActivo();
+
+        $perfilActivo = $perfiles[$perfil];
+
         return $this->render('perfil/index.html.twig', [
             'email' => $email,
             'nombre' => $nombre,
@@ -34,7 +72,9 @@ class PerfilController extends AbstractController
             'numero' => $numero,
             'cvv' => $cvv,
             'dni' => $dni,
-            'vencimiento' => $newDate
+            'vencimiento' => $newDate,
+            'myForm' => $form->createView(),
+            'perfilActivo' => $perfilActivo,
         ]);
     }
 }

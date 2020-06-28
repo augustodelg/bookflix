@@ -20,10 +20,14 @@
 
         <ul class="list-unstyled components">
             {# Lugar para poner algun texto o algo fijo#}
+
+            <a class="nav-link" href="#">Bienvenido {{perfilActivo.nombre}}! <span class="sr-only">(current)</span></a>
             <li>
                <a id="a-menu" class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li>
+             <a id="a-menu" class="nav-link" href="{{ path('ver_perfiles') }}">Perfiles <span class="sr-only">(current)</span></a>
+            </li>
             <div class="container-fluid">
                {% embed 'prueba/formulario-prueba.html.twig' %}
                 {% endembed %}

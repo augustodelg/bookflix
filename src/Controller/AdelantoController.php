@@ -70,13 +70,19 @@ class AdelantoController extends AbstractController
             $foto = $adelanto->getLibro()->getFoto();
         }
 
+        //Obtener perfil actual
+        $user = $this->getUser();
+        $perfiles = $user->getPerfiles();
+        $perfil = $user->getPerfilActivo();
 
+        $perfilActivo = $perfiles[$perfil];
 
         return $this->render('adelanto/index.html.twig', [
             'controller_name' => 'AdelantoController',
             'adelanto' => $adelanto,
             'foto' => $foto,
-            'myForm' => $form->createView()
+            'myForm' => $form->createView(),
+            'perfilActivo' => $perfilActivo,
         ]);
     }
 }

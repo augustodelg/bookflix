@@ -68,9 +68,19 @@ class LibroController extends AbstractController
 
         $libro = $em->getRepository(Libro::class)->findOneBy(array('id' => $data));
 
+        //Obtener perfil actual
+        $user = $this->getUser();
+        $perfiles = $user->getPerfiles();
+        $perfil = $user->getPerfilActivo();
+
+        $perfilActivo = $perfiles[$perfil];
+    
+
+
         return $this->render('libro/index.html.twig', [
             'libro' => $libro,
             'myForm' => $form->createView(),
+            'perfilActivo' => $perfilActivo,
         ]);
     }
 
@@ -116,11 +126,17 @@ class LibroController extends AbstractController
             $capitulos = array($em->getRepository(CapituloLibro::class)->find($capitulo));
         }
         
+        $user = $this->getUser();
+        $perfiles = $user->getPerfiles();
+        $perfil = $user->getPerfilActivo();
+
+        $perfilActivo = $perfiles[$perfil];
     
         return $this->render('libro/verLibro.html.twig', [
             'libro' => $libro,
             'myForm' => $form->createView(),
-            'capitulo' => $capitulos
+            'capitulo' => $capitulos,
+            'perfilActivo' => $perfilActivo,
         ]);
     }
 }

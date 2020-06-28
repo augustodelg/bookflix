@@ -9,56 +9,56 @@
 </style>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<img src="{{ asset('logo.svg', 'images') }}" width="300" height="30" class="d-inline-block align-top" alt="">
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Bienvenido {{perfilActivo.nombre}}! <span class="sr-only">(current)</span></a>
-      </li>
-            <li class="nav-item active">
-        <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      
+<div class="wrapper" >
+    <!-- Sidebar -->
     
+      <nav id="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ asset('logo.svg', 'images') }}" width="200" height="30" class="d-inline-block align-top" alt="">
+        </div>
 
-      
-    </ul>
-  <!--  <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-    </form>-->
-    {% embed 'prueba/formulario-prueba.html.twig' %}
-    {% endembed %}
+        <ul class="list-unstyled components">
+            {# Lugar para poner algun texto o algo fijo#}
+            <a class="nav-link" href="#">Bienvenido {{perfilActivo.nombre}}! <span class="sr-only">(current)</span></a>
+            <li>
+               <a id="a-menu" class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="active">
+             <a id="a-menu" class="nav-link" href="{{ path('ver_perfiles') }}">Perfiles <span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+            <div class="container-fluid">
+               {% embed 'prueba/formulario-prueba.html.twig' %}
+                {% endembed %}
+            </div>
+               
+            </li>
+            <li>
+                <a id="a-menu" class="nav-link" href="{{ path('perfil') }}">Cuenta <span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a id="a-menu" class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
 
-    <ul class="navbar-nav ">
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ path('ver_perfiles') }}">Perfiles <span class="sr-only">(current)</span></a>
-    </li>
-    </ul> 
-    <ul class="navbar-nav ">
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ path('perfil') }}">Cuenta <span class="sr-only">(current)</span></a>
-    </li>
-    </ul> 
-    <ul class="navbar-nav ">
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
-    </li>
-    </ul> 
-  </div>
-</nav>
-<br><br>
+      </nav>
+    <!-- Page Content -->
+    <div id="content" style= 'width: 60%;'>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left" ></i>
+                    <span style = "font-family: Asap Condensed;">MENU</span>
+                </button>
+        </nav>
+
+<br>
 
 <div class="container" style = "background: #FFF7A0 ; border-radius: 1.5% ; padding:6%">
-<h1 style="text-align:center ; font-family: Noto Sans KR">Perfiles</h1>
+<h1 style="text-align:center ;" id = "text-box">Perfiles</h1>
 <br>
-<h4 style="text-align:center" >Plan 
+<h4 style="text-align:center" id = "text-box" >Plan 
 {% if plan == false %}
   base
 {% else %}

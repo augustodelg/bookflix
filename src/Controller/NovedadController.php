@@ -59,9 +59,17 @@ class NovedadController extends AbstractController
         $novedad = $em->getRepository(Novedad::class)->findOneBy(array('id' => $data));
 
 
+        //Obtener perfil actual
+        $user = $this->getUser();
+        $perfiles = $user->getPerfiles();
+        $perfil = $user->getPerfilActivo();
+
+        $perfilActivo = $perfiles[$perfil];
+
         return $this->render('novedad/index.html.twig', [
             'myForm' => $form->createView(),
-            'novedad' => $novedad
+            'novedad' => $novedad,
+            'perfilActivo' => $perfilActivo,
         ]);
     }
 }

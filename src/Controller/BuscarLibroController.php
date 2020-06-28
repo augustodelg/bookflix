@@ -61,10 +61,20 @@ class BuscarLibroController extends AbstractController
 
         $libros = $libroRepository->buscarLibro($texto,$criterio);
         $cantidad = count($libros);
+
+
+        //Obtener perfil actual
+        $user = $this->getUser();
+        $perfiles = $user->getPerfiles();
+        $perfil = $user->getPerfilActivo();
+
+        $perfilActivo = $perfiles[$perfil];
+
         return $this->render('resultadosBusqueda.html.twig',[
             'libros'=>$libros,
             'myForm' => $form->createView(),
-            'cantidad'=>$cantidad
+            'cantidad'=>$cantidad,
+            'perfilActivo' => $perfilActivo,
         ]);
 
     }

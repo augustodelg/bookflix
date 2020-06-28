@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Entity\Cuenta;
 use App\Entity\Tarjeta;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class CuentaController extends AbstractController
 {
@@ -41,7 +43,7 @@ class CuentaController extends AbstractController
         $newDate = $vencimiento->format('Y-m-d');
 
         $defaultData = array('');
-        $form = $this->createFormBuilder($defaultData)
+        $formMod = $this->createFormBuilder($defaultData)
             ->add('email', EmailType::class, [ 'required' => false]//, 'empty_data' => $email, ]
             )
             ->add('nombre',TextType::class, [ 'required' => false]//, 'empty_data' => $nombre, ]
@@ -60,10 +62,10 @@ class CuentaController extends AbstractController
             )
             ->add('Modificar',SubmitType::class)
             ->getForm();
-        $form->handleRequest($request);
+        $formMod->handleRequest($request);
 
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($formMod->isSubmitted() && $formMod->isValid()){
             
 
             $em = $this->getDoctrine()->getManager();
@@ -72,7 +74,7 @@ class CuentaController extends AbstractController
 
             
 
-            $data = $form->getData();
+            $data = $formMod->getData();
             $errors=null;
 
             if ($data['vencimiento']!=null){
@@ -185,14 +187,48 @@ class CuentaController extends AbstractController
             // $em->persist($tarjeta);
             
             return new RedirectResponse('/perfil'); 
-
+            
 
 
             
 
         }
+        $defaultData = ['mensaje' => 'Busque su libro aqui'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('textoBusqueda', TextType::class)
+             ->add('ElegirCriterio', ChoiceType::class,[
+                'choices'=> [
+                    'Autor'=>'autor',
+                    'Genero'=>'genero',
+                    'Editorial'=>'editorial',
+                    'Titulo'=>'titulo',
+                    ],
+                ])
+        ->add('Buscar',SubmitType::class)
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+           $busqueda = $form->getData();
+            return $this->redirectToRoute('buscando_libro',[
+                'texto'=>$busqueda['textoBusqueda'],
+                'criterio'=>$busqueda['ElegirCriterio']
+                ]);
+            }
+
+        //Obtener perfil actual
+        $user = $this->getUser();
+        $perfiles = $user->getPerfiles();
+        $perfil = $user->getPerfilActivo();
+
+        $perfilActivo = $perfiles[$perfil];
+
         return $this->render('cuenta/index.html.twig', [
-            'formulario' => $form->createView(),
+            'formulario' => $formMod->createView(),
+            'myForm' => $form->createView(),
+            'perfilActivo' => $perfilActivo,
         ]);
     }
 }
