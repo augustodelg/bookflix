@@ -20,7 +20,6 @@ class PerfilPremiumController extends AbstractController
         $em->flush();
         return new RedirectResponse('home');
 
-
         // return $this->render('perfil_premium/index.html.twig', [
         //     'controller_name' => 'PerfilPremiumController',
         // ]);

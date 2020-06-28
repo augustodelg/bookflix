@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bookflix - Mis perfiles{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<img src="{{ asset('logo.svg', 'images') }}" width="300" height="30" class="d-inline-block align-top" alt="">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Bienvenido {{perfilActivo.nombre}}! <span class="sr-only">(current)</span></a>
+      </li>
+            <li class="nav-item active">
+        <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      
+    
+
+      
+    </ul>
+  <!--  <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+    </form>-->
+    {% embed 'prueba/formulario-prueba.html.twig' %}
+    {% endembed %}
+
+    <ul class="navbar-nav ">
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path('ver_perfiles') }}">Perfiles <span class="sr-only">(current)</span></a>
+    </li>
+    </ul> 
+    <ul class="navbar-nav ">
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path('perfil') }}">Cuenta <span class="sr-only">(current)</span></a>
+    </li>
+    </ul> 
+    <ul class="navbar-nav ">
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
+    </li>
+    </ul> 
+  </div>
+</nav>
+<br><br>
+
+<div class="container" style = "background: #FFF7A0 ; border-radius: 1.5% ; padding:6%">
+<h1 style="text-align:center ; font-family: Noto Sans KR">Perfiles</h1>
+<br>
+<h4 style="text-align:center" >Plan 
+{% if plan == false %}
+  base
+{% else %}
+  premium
+{% endif %}
+</h4>
+<br><br><br>
+
+<div class="row">
+{% for perfil in perfiles %}
+
+  <div class="col-sm-6">
+    <div class="card text-center mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{perfil.nombre}}</h5>
+        {# Si la posicion que esta recorriendo el for no es la misma que la del perfil activo entonces muestro el boton entrar #}
+        {% if loop.index - 1 != posActivo %}                                       
+            <a href="{{ path('seleccionar_perfil', {id: loop.index - 1}) }}" class="btn btn-warning">Entrar</a>                                 
+        {% else %}
+            <a style="color:white" class="btn btn-dark">Actual</a>
+        {% endif %}
+        {% if cantPerfiles > 1 %}
+          <a href="{{ path('eliminar_perfil', {id: loop.index - 1}) }}" class="btn btn-danger">Eliminar</a>
+        {% endif %}                           
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+</div>
+<br><br>
+
+{% if plan == false %}
+    {% if cantPerfiles < 2 %}
+        <a class="btn btn-warning" style="display:block ; margin:auto ; max-width:140px" href="{{ path('agregar_perfil') }}">Agregar perfil</a>
+    {% else %}
+        <a class="btn btn-danger" style="display:block ; margin:auto ; max-width:350px ; color:white">No puedes agregar mas perfiles!</a>
+    {% endif %}
+    <br>
+    <a href="{{ path('cambiar_plan', {tipo: plan}) }}" class="btn btn-info" style="display:block ; margin:auto ; max-width:250px">Cambiar a plan Premium!</a>
+{% else %}
+    {% if cantPerfiles < 4 %}
+        <a class="btn btn-warning" style="display:block ; margin:auto ; max-width:140px" href="{{ path('agregar_perfil') }}">Agregar perfil</a>
+    {% else %}
+        <a class="btn btn-danger" style="display:block ; margin:auto ; max-width:350px ; color:white">No puedes agregar mas perfiles!</a>
+    {% endif %}
+    <br>
+    {% if cantPerfiles > 2 %}
+
+      <input style="display:block ; margin:auto ; max-width:250px ; color:white"  type="button" onclick='alert("Debes poseer como maximo 2 perfiles para cambiarte al plan base!")' class="btn btn-info" value="Cambiar a plan Base!" />  
+
+    {% else %}
+
+      <a href="{{ path('cambiar_plan', {tipo: plan}) }}" class="btn btn-info" style="display:block ; margin:auto ; max-width:175px ; color:white">Cambiar a plan Base!</a>
+
+    {% endif %}
+
+{% endif %}
+
+
+{% endblock %}

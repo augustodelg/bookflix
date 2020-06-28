@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass="App\Repository\CuentaRepository")
  */
 class Cuenta implements UserInterface
-{
+{ 
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -65,6 +65,11 @@ class Cuenta implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $tarjeta;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $perfilActivo;
 
     public function __construct()
     {
@@ -245,6 +250,18 @@ class Cuenta implements UserInterface
     public function __toString()
     {
         return $this->nombre;
+    }
+
+    public function getPerfilActivo(): ?int
+    {
+        return $this->perfilActivo;
+    }
+
+    public function setPerfilActivo(int $perfilActivo): self
+    {
+        $this->perfilActivo = $perfilActivo;
+
+        return $this;
     }
 }
  

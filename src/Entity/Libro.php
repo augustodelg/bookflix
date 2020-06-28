@@ -12,7 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use DateTime;
 
 
-/**
+/** 
  * @ORM\Entity(repositoryClass="App\Repository\LibroRepository")
  * @UniqueEntity(
  *      fields={"isbn"},
