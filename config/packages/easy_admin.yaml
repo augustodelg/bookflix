@@ -40,6 +40,7 @@ easy_admin:
           actions:
             - { name: 'CargarPdf'}
             - { name: 'BorrarPdf'}
+            - { name: 'Modificar_Disponibilidad' }
           fields: ['isbn','titulo','autor', 'generos', 'editorial', 'ano',{ property: 'foto', type: 'image', base_path: '%app.path.libros_images%' },'updatedAt']
         form:
           fields: ['isbn','titulo', { property: 'autor', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Autor' } }, 'generos', 'editorial','ano', 'DESCRIPCION',{ property: 'fotoFile', type: 'vich_image', upload_dir: '%app.path.libros_images%'}]
