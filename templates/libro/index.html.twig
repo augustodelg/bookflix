@@ -8,52 +8,61 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<img src="{{ asset('logo.svg', 'images') }}" width="300" height="30" class="d-inline-block align-top" alt="">
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
-      </li>
+<div class="wrapper" >
+    <!-- Sidebar -->
     
+      <nav id="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ asset('logo.svg', 'images') }}" width="200" height="30" class="d-inline-block align-top" alt="">
+        </div>
 
-      
-    </ul>
+        <ul class="list-unstyled components">
+            {# Lugar para poner algun texto o algo fijo#}
+            <li>
+               <a id="a-menu" class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+            <div class="container-fluid">
+               {% embed 'prueba/formulario-prueba.html.twig' %}
+                {% endembed %}
+            </div>
+               
+            </li>
+            <li>
+                <a id="a-menu" class="nav-link" href="{{ path('perfil') }}">Cuenta <span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a id="a-menu" class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
 
-    {% embed 'prueba/formulario-prueba.html.twig' %}
-    {% endembed %}
-{# 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-    </form> #}
-    <ul class="navbar-nav ">
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ path('perfil') }}">Cuenta <span class="sr-only">(current)</span></a>
-    </li>
-    </ul> 
-    <ul class="navbar-nav ">
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
-    </li>
-    </ul> 
-  </div>
-</nav>
+      </nav>
+
+    
+    <!-- Page Content -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left" ></i>
+                    <span style = "font-family: Asap Condensed;">MENU</span>
+                </button>
+        </nav>
+        
 
 
 <br>
+
 
 
 
 
 <br>
 <div class="container" style = "background: #FFF7A0 ; border-radius: 1.5% ; padding:6%">
-    <div class="row">
+    <div class="row" style = "background: ">
         <div class="col-9">
             <h1 style="text-align:center; text-transform: uppercase;font-family: Asap Condensed" >{{libro.titulo}}</h1>
             <br>
@@ -61,54 +70,71 @@
             {{libro.descripcion}}
             </p>
             <ul class="list-group">
-                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Autor</span>  {{libro.autor}}</li>
-                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Genero</span>
+                <li class="list-group-item" style = "font-family: Noto Sans KR"><span class="badge badge-pill badge-warning" style="border-radius:9%;font-family: Asap Condensed">Autor</span>  {{libro.autor}}</li>
+                <li class="list-group-item" style = "font-family: Noto Sans KR"><span class="badge badge-pill badge-warning" style="border-radius:9%;font-family: Asap Condensed">Genero</span>
                     {% for i in libro.generos %}
                         {{i.nombre}},
                     {% endfor %}    
                 </li>
-                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Año</span>  {{libro.ano}}</li>
-                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Editorial</span>  {{libro.editorial}}</li>
-                <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">ISBN</span>  {{libro.ISBN}}</li>
+                <li class="list-group-item" style = "font-family: Noto Sans KR"><span class="badge badge-pill badge-warning" style="border-radius:9%;font-family: Asap Condensed">Año</span>  {{libro.ano}}</li>
+                <li class="list-group-item" style = "font-family: Noto Sans KR"><span class="badge badge-pill badge-warning" style="border-radius:9%;font-family: Asap Condensed">Editorial</span>  {{libro.editorial}}</li>
+                <li class="list-group-item" style = "font-family: Noto Sans KR"><span class="badge badge-pill badge-warning" style="border-radius:9%;font-family: Asap Condensed">ISBN</span>  {{libro.ISBN}}</li>
             </ul>
             <br>
-            {% if libro.tipoDeCarga == true %}
+          </div>
 
-                  <div class="row">
-                    <a style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+          <div class="col-sm">
+              <img style = "width:auto; height:auto; max-width:120%; max-height:100%; display:block ; margin:auto" src="/uploads/images/portadas/{{libro.foto}}">
+
+          </div>
+        </div>
+        
+            {% if libro.tipoDeCarga == true %}
+            <div class="row-sm" style = "background: ">
+              <div class="col-9">
+                    <a href = "{{ path('libro_pdf', {id: libro.id, capitulo: -1 }) }}"  style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+              </div>    
+              <div class="col-9">
                   {% if libro.capituloLibros[0].fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
                     <h5 style= "font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{ libro.capituloLibros[0].fechaDisponible|date('Y-m-d') }} </h1>
-                  </div>
+                  
                   {% endif %}
+              </div>
+            </div>
             {% else %}
               
               {% if libro.completo %}
-                <div class="row">
-                  
+                <div class="row justify-content-center" style = "background: ">
+                  <div class="col-4" style = "background: ">
                
-                <a style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+                    <a href = "{{ path('libro_pdf', {id: libro.id ,capitulo: -1 }) }}" style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+                  </div>
+                  
+                 <div class="col-3" >
+                        {% set fechaDisp = 'ok' %}
+                        {% for capitulo in libro.capituloLibros  %}
+                          {% if capitulo.fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
+                            {% set fechaDisp = capitulo.fechaDisponible|date('Y-m-d') %}
+                          {% endif %}
+                        {% endfor %}
+                        {% if fechaDisp is not same as('ok')  %}
+                          <h5 style= "text-transform: uppercase;font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{fechaDisp}} </h1>
+                        {% endif %}
+                </div>
+              </div>
 
-                {% set fechaDisp = 'ok' %}
-                {% for capitulo in libro.capituloLibros  %}
-                  {% if capitulo.fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
-                    {% set fechaDisp = capitulo.fechaDisponible|date('Y-m-d') %}
-                  {% endif %}
-                {% endfor %}
-                {% if fechaDisp is not same as('ok')  %}
-                   <h5 style= "font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{fechaDisp}} </h1>
-                {% endif %}
 
               
-                </div>
+                <br>
                 {% endif %}
                 {% if libro.capituloLibros|length > 0 %}
+                  <h3 style=" text-transform: uppercase;font-family: Asap Condensed"> Capitulos :</h3>
                   {% for capitulo in libro.capituloLibros %}
                   <div class="row">
                     
-                    
-                    <a style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Leer capitulo {{capitulo.nro}}</a>
+                    <a href = {{ path('libro_pdf', {id: libro.id, capitulo: capitulo.id }) }} style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Leer capitulo {{capitulo.nro}}</a>
                     {% if capitulo.fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
-                      <h5 style= "font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{ capitulo.fechaDisponible|date('Y-m-d') }} </h1>
+                      <h5 style= "text-transform: uppercase;font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{ capitulo.fechaDisponible|date('Y-m-d') }} </h1>
                     {% endif %}
 
                   </div>
@@ -122,20 +148,24 @@
              {#<h4 style="text-align: left ; margin-top:5px">{{libro.autor}}</h4>
             <h5 style="text-align: left">Editoral {{libro.editorial}}</h5> #}
         </div>
-        <div class="col-3">
-              <img style = "width:auto; height:auto; max-width:300px; max-height:450px; display:block ; margin:auto" src="/uploads/images/portadas/{{libro.foto}}">
+        <br>
+        <br>
+        <div class="row justify-content-center" >
+          <div class="col-sm" >
+            <div style="margin:auto ; width:50%">
+              <hr>
+            </div>
 
-        </div>
+            <a class="btn btn-warning" style="display:block ; margin:auto ; max-width:80px" href="{{ path('home') }}">Volver</a>
+            </div>
+          </div>
+         <br>
+      </div>
+
     </div>
+
 </div>
-<br>
-<div style="margin:auto ; width:65%">
-<hr>
-</div>
-<br>
-<a class="btn btn-warning" style="display:block ; margin:auto ; max-width:80px" href="{{ path('home') }}">Volver</a>
-</div>
-<br>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.js"></script>
 
 {% endblock %}

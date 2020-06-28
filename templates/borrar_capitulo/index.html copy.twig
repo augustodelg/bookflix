@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BorrarCapituloController!{% endblock %}
+
+{% block body %}
+<table class="table">
+    <tr>
+        <td>nro</td>
+        <td>actions</td>
+    </tr>
+    {% for cap in capitulos %}
+        <tr>
+            <td>{{cap.nro}}</td>
+        <td>
+        <button id="go">
+                Borrar
+            </button></td>
+        </tr>
+        {#<div class="container" id = "top-box">
+        <h1  class="display-5" id = "text-box" > Capitulo Nº{{cap.nro}}</h1>
+        </div>
+        <div class="container" id = "end-box" >
+            <div class="modal fade" id="confirm-delete" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Eliminar registro</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label>¿Estás seguro de eliminar el registro?</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-ok" data-dismiss="modal">Sí</button>
+                            <a class="btn btn-danger" data-dismiss="modal">No
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>#}
+            
+
+        
+    {% endfor %}
+
+{% endblock %}
+

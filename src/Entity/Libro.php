@@ -327,6 +327,12 @@ class Libro
         return $this;
     }
 
+    public function getAnCapitulo(int $nro): CapituloLibro
+    {
+        
+        return $this->capituloLibros->get($nro);
+    }
+
     /**
      * @return Collection|CapituloLibro[]
      */

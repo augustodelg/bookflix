@@ -91,52 +91,7 @@
 </style>
 
 
-<div class="wrapper" >
-    <!-- Sidebar -->
-    
-      <nav id="sidebar">
-        <div class="sidebar-header">
-            <img src="{{ asset('logo.svg', 'images') }}" width="200" height="30" class="d-inline-block align-top" alt="">
-        </div>
 
-        <ul class="list-unstyled components">
-            {# Lugar para poner algun texto o algo fijo#}
-            <li class="active">
-               <a id="a-menu" class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-            <div class="container-fluid">
-               {% embed 'prueba/formulario-prueba.html.twig' %}
-                {% endembed %}
-            </div>
-               
-            </li>
-            <li>
-                <a id="a-menu" class="nav-link" href="{{ path('perfil') }}">Cuenta <span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a id="a-menu" class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-
-      </nav>
-
-    
-    <!-- Page Content -->
-    <div id="content">
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left" ></i>
-                    <span style = "font-family: Asap Condensed;">MENU</span>
-                </button>
-        </nav>
-        
-
-
-
-{#
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light"  style =  "position: fixed; width: 100%; z-index: 100;background: #FFFFFF; border-radius:20px;">
 <img src="{{ asset('logo.svg', 'images') }}" width="300" height="30" class="d-inline-block align-top" alt="">
@@ -169,40 +124,38 @@
 </nav>
 <br>
 <br>
+<div class="row">
+    <div class="col-sm">
+    <br></br>
+      <div class="container" id = "top-box">
+        <h1  class="display-5" id = "text-box" >Novedades <span class="badge badge-secondary">Ultimas</span> </h1>
+      </div>
+      <div class="container" id = "end-box" >
+        <ul id="navigation">
+          <div class="swiper-container">
+              <div class="swiper-wrapper">
+                {% for i in novedades %}
+                <div class="swiper-slide">
+                  <div class="card" style="width:120%; height:auto;max-width:80%; max-height:200%;">
+                        <img class="card-img-top" style = "width:auto; height:auto; max-width:100%; max-height:50%;" src="/uploads/images/novedades/{{i.foto}}" alt="Card image cap" >
+                        <div class="card-body">
+                          <h5 class="card-title" style= "font-family: Asap Condensed; padding: 1%;">{{ i.titulo }}</h5>
+                            <p class="card-text" style= "padding: 1%;font-family: Noto Sans KR" id = "text-cut">{{i.descripcion}}</p>
+                            <a class="btn btn-warning" style="display:block ; margin:auto;font-family: Noto Sans KR" href="{{ path('novedad', {id: i.id}) }}">Ver novedad <span class="sr-only">(current)</span></a>
 
-#}
-<div class="row justify-content-end">
-
-  <div class="col-sm">
-      <br></br>
-        <div class="container" id = "top-box">
-          <h1  class="display-5" id = "text-box" >Novedades <span class="badge badge-secondary">Ultimas</span> </h1>
-        </div>
-        <div class="container" id = "end-box" >
-          <ul id="navigation">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                  {% for i in novedades %}
-                      <div class="swiper-slide">
-                        <div class="card" style="width:120%; height:auto;max-width:80%; max-height:200%;">
-                              <img class="card-img-top" style = "width:auto; height:auto; max-width:100%; max-height:50%;" src="/uploads/images/novedades/{{i.foto}}" alt="Card image cap" >
-                              <div class="card-body">
-                                <h5 class="card-title" style= "font-family: Asap Condensed; padding: 1%;">{{ i.titulo }}</h5>
-                                  <p class="card-text" style= "padding: 1%;font-family: Noto Sans KR" id = "text-cut">{{i.descripcion}}</p>
-                                  <a class="btn btn-warning" style="display:block ; margin:auto;font-family: Noto Sans KR" href="{{ path('novedad', {id: i.id}) }}">Ver novedad <span class="sr-only">(current)</span></a>
-                              </div>
                         </div>
-                      </div>
-                  {% endfor %}
-                </div>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
-          </ul>
-        </div>
+            </div>
+        </ul>
+      </div>
     </div>
-</div>
+  </div>
 
 <br>
-<div class="row justify-content-end" style="margin-top:20px">
+<div class="row" style="margin-top:20px">
     <div class="col-sm">
       <div class="container"  id = "top-box" >
         <h1  class="display-5" id = "text-box">Adelantos <span class="badge badge-secondary">Ultimos</span></h1>
@@ -264,8 +217,6 @@
   </div>
 </div>
 <br>
-
-</div>
   <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/js/swiper.js"></script>
 <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>

@@ -16,4 +16,11 @@ class AdminControllerBookflix extends EasyAdminController
         return $this-> redirectToRoute('update_book', array('id' =>  $entity->get('id'),'entity' => $entity));
 
     }
+    protected function BorrarPdfAction(){
+        
+        $entity = $this->request->query;
+
+        return $this-> redirectToRoute('borrar_capitulo', array('id' =>  $entity->get('id'),'entity' => $entity));
+
+    }
 }

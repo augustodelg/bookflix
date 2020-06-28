@@ -3,7 +3,7 @@
 {% block title %}Bookflix - Mi cuenta{% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light"  style =  "position: fixed; width: 100%; z-index: 100;background: #FFFFFF; border-radius:20px;">
 <img src="{{ asset('logo.svg', 'images') }}" width="300" height="30" class="d-inline-block align-top" alt="">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,42 +13,47 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
+       <a class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
       </li>
     
-      
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    {#{% embed 'prueba/formulario-prueba.html.twig' %}
+    {% endembed %}#}
+
     <ul class="navbar-nav ">
     <li class="nav-item active">
         <a class="nav-link" href="{{ path('perfil') }}">Cuenta <span class="sr-only">(current)</span></a>
     </li>
-    </ul>
-        <ul class="navbar-nav ">
+    </ul> 
+    <ul class="navbar-nav ">
     <li class="nav-item active">
         <a class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
     </li>
-    </ul>  
+    </ul> 
   </div>
 </nav>
 
 <div class="container mt-5">
-<h1>Mis datos</h1>
-<br>
-<ul class="list-group">
-  <li class="list-group-item">
-  <span class="badge badge-pill badge-warning" style="border-radius:9%">Email    </span>  {{email}}</li>
-  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Nombre   </span>  {{nombre}}</li>
-  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Apellido  </span>  {{apellido}}</li>
-  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Numero de tarjeta   </span>  {{numero}}</li>
-  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">CVV  </span>  {{cvv}}</li>
-  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">DNI  </span>  {{dni}}</li>
-  <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Vencimiento  </span>  {{vencimiento}}</li>
-</ul>
+
+<div class="container"  id = "top-box" >
+        <h1  class="display-5" id = "text-box">Mis datos<span class="badge badge-secondary">Ultimos</span></h1>
+      </div>
+
+<div class="container" id = "end-box">
+  <ul class="list-group">
+    <li class="list-group-item">
+    <span class="badge badge-pill badge-warning" style="border-radius:9%">Email    </span>  {{email}}</li>
+    <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Nombre   </span>  {{nombre}}</li>
+    <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Apellido  </span>  {{apellido}}</li>
+    <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Numero de tarjeta   </span>  {{numero}}</li>
+    <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">CVV  </span>  {{cvv}}</li>
+    <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">DNI  </span>  {{dni}}</li>
+    <li class="list-group-item"><span class="badge badge-pill badge-warning" style="border-radius:9%">Vencimiento  </span>  {{vencimiento}}</li>
+  </ul>
+</div>
 <br>
 <a class="btn btn-warning" href="{{ path('modificar-cuenta') }}" role="button">Modificar</a>
 </div>
+
+
 {% endblock %}
