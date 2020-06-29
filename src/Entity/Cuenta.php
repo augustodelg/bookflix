@@ -71,6 +71,11 @@ class Cuenta implements UserInterface
      */
     private $perfilActivo;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fechaRegistro;
+
     public function __construct()
     {
         $this->perfiles = new ArrayCollection();
@@ -260,6 +265,18 @@ class Cuenta implements UserInterface
     public function setPerfilActivo(int $perfilActivo): self
     {
         $this->perfilActivo = $perfilActivo;
+
+        return $this;
+    }
+
+    public function getFechaRegistro(): ?\DateTimeInterface
+    {
+        return $this->fechaRegistro;
+    }
+
+    public function setFechaRegistro(?\DateTimeInterface $fechaRegistro): self
+    {
+        $this->fechaRegistro = $fechaRegistro;
 
         return $this;
     }

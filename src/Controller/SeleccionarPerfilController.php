@@ -30,8 +30,8 @@ class SeleccionarPerfilController extends AbstractController
         return new RedirectResponse('/home');        
 
 
-        return $this->render('seleccionar_perfil/index.html.twig', [
-            'controller_name' => 'SeleccionarPerfilController',
-        ]);
+        // return $this->render('seleccionar_perfil/index.html.twig', [
+        //     'controller_name' => 'SeleccionarPerfilController',
+        // ]);
     }
 }

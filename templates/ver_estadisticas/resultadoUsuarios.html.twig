@@ -149,7 +149,7 @@
                             {% block content_header %}
                                 <div class="d-flex flex-row justify-content-between align-content-center w-100">
                                     <div class="content-header-title">
-                                        <h1 class="title">Borrar capitulos</h1>
+                                        <h1 class="title">Resultado</h1>
                                     </div>
 
                                     {% block global_actions_wrapper %}
@@ -171,45 +171,59 @@
                         <section id="main" class="content-body">
                             {% block main %}    
 
-
-                                    <table class="table datagrid">
+                            {% if cantidad != 0  %}
+                                <table class="table datagrid">
                                     
                                     <thead>
                                         <tr>
-                                            <td>Numero</td>
-                                            <td>Fecha subido</td>
+                                            <td>Nombre </td>
+                                            <td>Apellido </td>
+                                            <td>Email</td>
+                                            <td>Tipo de Plan</td>
+                                            <td>Fecha Registro</td>
                                             <td></td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for cap in capitulos %}
+                                        {% for usuario in usuarios %}
                                             <tr>
                                                 <td>
-                                                    {{cap.nro}}
+                                                {{ usuario.nombre}}
                                                 </td>
                                                 <td>
-                                                    {{cap.getUpdatedAt|date('Y-m-d')}}
+                                                {{ usuario.apellido }}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-danger" onclick="preguntaBorrar({{cap.id}})">Borrar</button>
+                                                    {{usuario.email}}
                                                 </td>
-                                            
- 
+                                                {% if usuario.premium == 1 %}
+                                                    <td>
+                                                    Premium
+                                                    </td>
+                                                {% else %}
+                                                    <td>
+                                                    Base
+                                                    </td>
+
+                                                {% endif %}
+
+                                                <td>
+                                                    {{usuario.fechaRegistro|date('Y-m-d')}}
+                                                </td>
+
                                             
                                         {% endfor %}
                                         </tr>
                                     </tbody>
-                                    </table>
+                                </table>
     
                             
-                            <script>
-                            function preguntaBorrar(id){
-                                if(confirm('¿Estás seguro que deseas borrar?' )){
-                                    window.location.href = ('borrar_capitulo_basedatos', id);
-                                    
-                                }
-                            }
-                            </script>
+                            {% else %}
+                                <p> No se encontraron resultados para su búsqueda </p>
+                            {% endif %}
+
+                        <a class="btn btn-primary btn-sm" href={{path('ver_estadisticas')}} role="button">Volver</a>
+
                             {% endblock %}
                         </section>
 
@@ -248,5 +262,9 @@
 
         <script src="{{ asset('capitulosUpdate.js', 'js') }}"></script>
 {% endblock %}
+
+
+
+
 
 

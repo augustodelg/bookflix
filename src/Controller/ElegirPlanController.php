@@ -18,11 +18,13 @@ class ElegirPlanController extends AbstractController
         if (is_null($plan)){                                     // Si el usuario nunca eligio un plan
             return $this->render('elegir_plan/index.html.twig', [
                 'controller_name' => 'ElegirPlanController',
+                'cuenta' => $user,
             ]);
         }
         $perfiles = $user->getPerfiles();
         return $this->render('seleccionar_perfil/index.html.twig', [
             'perfiles' => $perfiles,
+            'cuenta' => $user,
         ]);
     }
 } 

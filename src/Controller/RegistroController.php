@@ -20,7 +20,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Entity\Tarjeta;
+use DateTime;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints\Length;
@@ -62,8 +64,10 @@ class RegistroController extends AbstractController
         $perfil = new Perfil();
 
         if ($form->isSubmitted() && $form->isValid()){
+            $hoy = new DateTime();
             $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
+            $user->setFechaRegistro($hoy);
             $user->setEmail($data['email']);
             $user->setNombre($data['nombre']);
             $user->setApellido($data['apellido']);

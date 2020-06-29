@@ -81,13 +81,35 @@
             <a style="color:white" class="btn btn-dark">Actual</a>
         {% endif %}
         {% if cantPerfiles > 1 %}
-          <a href="{{ path('eliminar_perfil', {id: loop.index - 1}) }}" class="btn btn-danger">Eliminar</a>
-        {% endif %}                           
+          <button type="button" class="btn btn-danger" onclick="preguntarBorrar({{loop.index - 1}})">Eliminar</button>
+   
+                    {# <button type="button" class="btn btn-danger" onclick="preguntarBorrar({{perfil.id}})">Eliminar</a> #}
+
+        {% endif %}          
+
+
+
+
+ 
+
       </div>
     </div>
   </div>
 
 {% endfor %}
+
+        <script>
+            function preguntarBorrar(id){
+              if(confirm('¿Estás seguro que deseas borrar el perfil?' )){
+               window.location.href="eliminarPerfil/"+id; 
+
+               
+              }
+            }
+        </script>
+        {# ('eliminar_perfil', id); #}
+         {# window.location.href="eliminarPerfil?="+id; #}
+
 </div>
 </div>
 <br><br>

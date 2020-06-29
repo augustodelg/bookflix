@@ -149,7 +149,7 @@
                             {% block content_header %}
                                 <div class="d-flex flex-row justify-content-between align-content-center w-100">
                                     <div class="content-header-title">
-                                        <h1 class="title">Borrar capitulos</h1>
+                                        <h1 class="title">Modifique las fechas que desee del Capítulo {{capitulo.nro}}</h1>
                                     </div>
 
                                     {% block global_actions_wrapper %}
@@ -169,47 +169,36 @@
                         {% endblock content_header_wrapper %}
 
                         <section id="main" class="content-body">
-                            {% block main %}    
+                            {% block main %}
+                                    <div class="row justify-content-md-center">
+                                        <div class="col-5">
 
+                                {% for message in app.flashes('error') %}
+                                    <div class="alert alert-success">
+                                     {{ message }}
+                                    </div>
+                                {% endfor %}
+                                    {{ form_start(formulario) }}
+                                        {{ form_errors(formulario) }}
+                                        <p>
+                                        Este es la fecha actual de lanzamiento {{capitulo.fechaDisponible|date('Y-m-d')}}
+                                        {{form_widget(formulario.fechaDisponible)}}
+                                        </p>
+                                        <p></p>
+                                        <p>
+                                        Este es la fecha actual de vencimiento {{capitulo.fechaVencimiento|date('Y-m-d')}}
+                                        {{form_widget(formulario.fechaVencimiento)}}
+                                        </p>
+                                        
+                                    {{form_widget(formulario.guardar)}}
+                                    {{ form_end(formulario) }}             
 
-                                    <table class="table datagrid">
-                                    
-                                    <thead>
-                                        <tr>
-                                            <td>Numero</td>
-                                            <td>Fecha subido</td>
-                                            <td></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for cap in capitulos %}
-                                            <tr>
-                                                <td>
-                                                    {{cap.nro}}
-                                                </td>
-                                                <td>
-                                                    {{cap.getUpdatedAt|date('Y-m-d')}}
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-danger" onclick="preguntaBorrar({{cap.id}})">Borrar</button>
-                                                </td>
-                                            
- 
-                                            
-                                        {% endfor %}
-                                        </tr>
-                                    </tbody>
-                                    </table>
+                                        </div>
+                                    </div>
+
     
                             
-                            <script>
-                            function preguntaBorrar(id){
-                                if(confirm('¿Estás seguro que deseas borrar?' )){
-                                    window.location.href = ('borrar_capitulo_basedatos', id);
-                                    
-                                }
-                            }
-                            </script>
+                            
                             {% endblock %}
                         </section>
 
@@ -239,14 +228,11 @@
 
 
     {{ include('@EasyAdmin/default/includes/_select2_widget.html.twig') }}
-
-     <script
-
+     <script>
                 src="https://code.jquery.com/jquery-2.2.4.min.js"
                 integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
                 crossorigin="anonymous"></script>
 
         <script src="{{ asset('capitulosUpdate.js', 'js') }}"></script>
 {% endblock %}
-
 

@@ -23,4 +23,12 @@ class AdminControllerBookflix extends EasyAdminController
         return $this-> redirectToRoute('borrar_capitulo', array('id' =>  $entity->get('id'),'entity' => $entity));
 
     }
+
+    public function Modificar_DisponibilidadAction()
+    {
+        $entity = $this->request->query;
+        return $this->redirectToRoute('update_fecha',array('id' =>  $entity->get('id'),'entity' => $entity));
+
+    }
+
 }
