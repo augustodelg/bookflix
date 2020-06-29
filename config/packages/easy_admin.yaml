@@ -67,6 +67,9 @@ easy_admin:
           - { entity: 'Libros', icon: 'book' }
           - { label: 'Adelanto' }
           - { entity: 'Adelantos', icon: 'book-open' }
+          - { label: 'Ver Estadísticas', route: 'ver_estadisticas'}
+  
+
 
   
 

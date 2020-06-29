@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use DateTime;
 
 /**
  * @method Cuenta|null find($id, $lockMode = null, $lockVersion = null)
@@ -34,6 +35,21 @@ class CuentaRepository extends ServiceEntityRepository implements PasswordUpgrad
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+    public function buscarUsuarios(DateTime $fechaInicio,DateTime $fechaFin)
+    {
+ 
+    
+        $qb = $this->createQueryBuilder("c");
+        $qb
+            ->andWhere('c.fechaRegistro BETWEEN :from AND :to')
+            ->setParameter('from', $fechaInicio )
+            ->setParameter('to', $fechaFin)
+        ;
+        $result = $qb->getQuery()->getResult();
+    
+        return $result;
     }
 
     // /**
