@@ -7,10 +7,19 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
+    <div class="col-xl-12 col-sm-12" style="margin-top:-3%">
+    <img src="{{ asset('logo.svg', 'images') }}" class=" img-fluid rounded mx-auto d-block" height="200" width="800" alt="Bookflix" id="logo" style= "padding: 8%;" >
+    </div>
+<div class="container" style="max-width: 500px" id="top-box">
+<h2 style="text-align: center" id="text-box"> Agregar perfil </h3>
 
- <div class="row" >
+</div>
+
+ <div class="container" id="end-box" style="max-width: 500px">
+    <div class="row" >
       <div class="col align-self-start" id ="contaForm" style=" font-weight:bold;" >
             {{form(formulario)}}
+      </div>
     </div>
 </div>
 {% endblock %}

@@ -9,26 +9,51 @@
 </style>
 
 
+<div class="col-xl-12 col-sm-12" style="margin-top:-3%">
+  <img src="{{ asset('logo.svg', 'images') }}" class=" img-fluid rounded mx-auto d-block" height="200" width="800" alt="Bookflix" id="logo" style= "padding: 8%;" >
+</div>
 
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Plan normal</h5>
-        <p class="card-text">Servicio de hasta 2 perfiles.</p>
-        <a href="{{ path('perfil_normal') }}" class="btn btn-primary">Seleccionar</a>
+<div class="container">
+  <div class="row justify-content-md-center">
+
+    <div class="col-6">
+      <div style="max-width: 500px" id="top-box">
+        <h2 style="text-align: center" id="text-box"> Plan base </h3>
       </div>
+      <div id="end-box" style="max-width: 500px">
+        <div class="col-sm-auto">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="text-align:center">Servicio de hasta 2 perfiles.</h5>
+              <br>
+              <a href="{{ path('perfil_normal') }}" class="btn btn-primary" style="display:block ; margin:auto ; max-width:150px" >Seleccionar</a>
+            </div>
+          </div>
+        </div>
+      </div>  
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Plan premium</h5>
-        <p class="card-text">Servicio de hasta 4 perfiles.</p>
-        <a href="{{ path('perfil_premium') }}" class="btn btn-primary">Seleccionar</a>
+
+    <div class="col-6">
+      <div style="max-width: 500px" id="top-box">
+        <h2 style="text-align: center" id="text-box"> Plan Premium </h3>
       </div>
+      <div id="end-box" style="max-width: 500px">
+        <div class="col-sm-auto">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="text-align:center">Servicio de hasta 4 perfiles.</h5>
+              <br>
+              <a href="{{ path('perfil_premium') }}" class="btn btn-primary" style="display:block ; margin:auto ; max-width:150px" >Seleccionar</a>
+            </div>
+          </div>
+        </div>
+      </div>  
     </div>
   </div>
 </div>
+
+
+
+
 
 {% endblock %}

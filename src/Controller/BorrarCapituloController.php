@@ -26,7 +26,7 @@ class BorrarCapituloController extends AbstractController
         ]);
     }
 
-
+ 
     /**
      * @Route("/borrarcapitulo/{id}", name="borrar_capitulo_basedatos")
      */
