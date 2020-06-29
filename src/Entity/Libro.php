@@ -117,6 +117,11 @@ class Libro
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $tipoDeCarga;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CalificacionComentario", mappedBy="libro", orphanRemoval=true)
+     */
+    private $calificacionesComentarios;
     // INDICA COMO SE SUBE EL LIBRO true = libro completo  --  false = por capitulo
  
 
@@ -126,6 +131,7 @@ class Libro
         $this->perfiles = new ArrayCollection();
         $this->capituloLibros = new ArrayCollection();
         $this->completo=false ;
+        $this->calificacionesComentarios = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -388,6 +394,50 @@ class Libro
         return $this;
     }
 
+    /**
+     * @return Collection|CalificacionComentario[]
+     */
+    public function getCalificacionesComentarios(): Collection
+    {
+        return $this->calificacionesComentarios;
+    }
 
+    public function addCalificacionesComentario(CalificacionComentario $calificacionesComentario): self
+    {
+        if (!$this->calificacionesComentarios->contains($calificacionesComentario)) {
+            $this->calificacionesComentarios[] = $calificacionesComentario;
+            $calificacionesComentario->setLibro($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalificacionesComentario(CalificacionComentario $calificacionesComentario): self
+    {
+        if ($this->calificacionesComentarios->contains($calificacionesComentario)) {
+            $this->calificacionesComentarios->removeElement($calificacionesComentario);
+            // set the owning side to null (unless already changed)
+            if ($calificacionesComentario->getLibro() === $this) {
+                $calificacionesComentario->setLibro(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPromedioCalificacion(): ?int
+    {
+        $calificacion= 0;
+        //esto es por si cuando le hago
+        $total =0;
+        foreach ($this->getCalificacionesComentarios() as $comentario) {
+            $calificacion += $comentario->getCalificacion();
+            $total+=1;
+        }
+        if ($total !== 0) {
+            return $calificacion / $total;
+        }
+        return 0;
+    }
 
 }

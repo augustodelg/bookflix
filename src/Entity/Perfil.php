@@ -38,9 +38,15 @@ class Perfil
      */
     private $activo;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CalificacionComentario", mappedBy="perfil", orphanRemoval=true)
+     */
+    private $calificacionesComentarios;
+
     public function __construct()
     {
         $this->favoritos = new ArrayCollection();
+        $this->calificacionesComentarios = new ArrayCollection();
     }
  
     public function getId(): ?int
@@ -108,5 +114,41 @@ class Perfil
         $this->activo = $activo;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|CalificacionComentario[]
+     */
+    public function getCalificacionesComentarios(): Collection
+    {
+        return $this->calificacionesComentarios;
+    }
+
+    public function addCalificacionesComentario(CalificacionComentario $calificacionesComentario): self
+    {
+        if (!$this->calificacionesComentarios->contains($calificacionesComentario)) {
+            $this->calificacionesComentarios[] = $calificacionesComentario;
+            $calificacionesComentario->setPerfil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalificacionesComentario(CalificacionComentario $calificacionesComentario): self
+    {
+        if ($this->calificacionesComentarios->contains($calificacionesComentario)) {
+            $this->calificacionesComentarios->removeElement($calificacionesComentario);
+            // set the owning side to null (unless already changed)
+            if ($calificacionesComentario->getPerfil() === $this) {
+                $calificacionesComentario->setPerfil(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCalificacionesComentariosLibro(): Collection
+    {
+
     }
 }

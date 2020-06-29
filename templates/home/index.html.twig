@@ -219,7 +219,7 @@
                                 <div class="descriptionsBook">
                                   <h1>{{ i.titulo }}</h1>
                                   <p>{{i.descripcion}}</p>
-                                  <a href = "{{ path('libro', {id: i.id}) }}" class="btn btn-warning" style="margin-bottom:20px ; display:block ; margin:auto ; position:absolute ; bottom:40px ; width:90px">
+                                  <a href = {{ path('libro', {id: i.id, libro: i}) }} class="btn btn-warning" style="margin-bottom:20px ; display:block ; margin:auto ; position:absolute ; bottom:40px ; width:90px">
                                       Ver
                                   </a>
                                 </div>

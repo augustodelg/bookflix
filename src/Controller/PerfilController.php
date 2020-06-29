@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use App\Entity\Cuenta;
 use App\Entity\Perfil;
+use App\Entity\Libro;
+use App\Entity\CalificacionComentario;
 
 class PerfilController extends AbstractController
 {
@@ -76,5 +78,19 @@ class PerfilController extends AbstractController
             'myForm' => $form->createView(),
             'perfilActivo' => $perfilActivo,
         ]);
+    }
+
+    /**
+     * @Route("/eliminarcomentario/{id}", name="borrar_comentario_libro")
+    */
+    public function eliminarcomentario($id, Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        $comentario = $em->getRepository(CalificacionComentario::class)->findOneBy(array('id' => $id));
+        $libro = $comentario->getLibro();
+        $em->remove($comentario);
+        $em->flush();
+        return $this-> redirectToRoute('libro',['id' => $libro->getId(),'libro' => $libro]);
+        
     }
 }

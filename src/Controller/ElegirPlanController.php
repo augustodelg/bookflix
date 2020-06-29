@@ -14,7 +14,8 @@ class ElegirPlanController extends AbstractController
     public function index()
     {
         $user = $this->getUser();
-        if ($user->premiumNull()==true){                                     // Si el usuario nunca eligio un plan
+        $plan = $user->getPremium();
+        if (is_null($plan)){                                     // Si el usuario nunca eligio un plan
             return $this->render('elegir_plan/index.html.twig', [
                 'controller_name' => 'ElegirPlanController',
             ]);

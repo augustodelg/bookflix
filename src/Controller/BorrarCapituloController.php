@@ -17,9 +17,6 @@ class BorrarCapituloController extends AbstractController
      */
     public function index($id, Libro $libro, Request $request)
     {
-
-
-        
         return $this->render('borrar_capitulo/index.html.twig', [
             'controller_name' => 'BorrarCapituloController',
             'capitulos' => $libro->getCapituloLibros(),
