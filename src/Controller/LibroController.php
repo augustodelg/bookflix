@@ -38,9 +38,9 @@ class LibroController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $novedades = $em->getRepository(Novedad::class)->NovedadesInicio();
-        $adelantos = $em->getRepository(Adelanto::class)->AdelantosInicio();
-        $librosHomePrueba = $em->getRepository(Libro::class)->librosHome();
+        //$novedades = $em->getRepository(Novedad::class)->NovedadesInicio();
+        //$adelantos = $em->getRepository(Adelanto::class)->AdelantosInicio();
+        //$librosHomePrueba = $em->getRepository(Libro::class)->librosHome();
 
         $defaultData = ['mensaje' => 'Busque su libro aqui'];
         $form = $this->createFormBuilder($defaultData)
@@ -99,6 +99,18 @@ class LibroController extends AbstractController
         }
        
 
+        //Pregunto si los libros favoritos del perfil activo, contienen al libro que se está buscando    
+
+        $favoritos = $perfilActivo->getFavoritos();
+        $estaEnFavoritos = false;
+        foreach ($favoritos as $unLibro)
+            {
+                if ($unLibro->getId() == $libro->getId())
+                   {
+                       $estaEnFavoritos = true;
+                        break;
+                   }
+            }
        
     
         
@@ -110,6 +122,7 @@ class LibroController extends AbstractController
             'comentario' =>  $comentarioForm->createView(),
             'comentarUsuarioExistente' => $comentarioLibro->isEmpty(),
             'comentarioDelPerfil' => $comentarioLibro->first(),
+            'estaEnFavoritos'=>$estaEnFavoritos,
         ]);
     }
 
@@ -160,6 +173,9 @@ class LibroController extends AbstractController
         $perfil = $user->getPerfilActivo();
 
         $perfilActivo = $perfiles[$perfil];
+        
+        
+
     
 
        

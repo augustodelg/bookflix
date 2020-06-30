@@ -1,4 +1,3 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Bookflix{% endblock %}
@@ -103,7 +102,7 @@
             <li >
                <a id="a-menu" class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li>
+             <li>
                 <a id="a-menu" class="nav-link" href="{{ path('ver_favoritos') }}">Ver Favoritos <span class="sr-only">(current)</span></a>
             </li>
             <li>
@@ -142,37 +141,43 @@
 
  <!-- LIBROS -->
 
-<div class="row">
+
+
+    <div class="row">
   <div class="col-sm">
       <div class="container-fluid" id = "top-box" >
-        <h1  class="display-5" id = "text-box">Resultados <span class="badge badge-secondary">Busqueda</span> </h1>
+        <h1  class="display-5" id = "text-box">Libros <span class="badge badge-secondary">Favoritos</span> </h1>
       </div>
       <div class="container" id = "end-box">
       <ul id="navigation">
-      <div class="swiper-container">
-                {% if cantidad == 0 %}
-                     <h1>No se encontraron resultados para su busqueda</h1>
-                  {% endif %}
-                <div class="swiper-wrapper">
-                  {% for i in libros %}
-                    <div class="swiper-slide">
-                            <div class="wrapper">
-                              <div class="cardBook">
-                                <img style = "width:auto; height:auto; max-width:300px; max-height:450px;" src="/uploads/images/portadas/{{i.foto}}">
-                                <div class="descriptionsBook">
-                                  <h1>{{ i.titulo }}</h1>
-                                  <p>{{i.descripcion}}</p>
-                                  <a href = "{{ path('libro', {id: i.id}) }}" class="btn btn-warning" style="margin-bottom:20px ; display:block ; margin:auto ; position:absolute ; bottom:40px ; width:90px">
-                                      Ver
-                                  </a>
-                                </div>
-                              </div>
 
-                            </div>
-                    </div>
-                  {% endfor %}
-                </div> 
-        </div>
+                                <table class="table datagrid">
+                                    
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Titulo</th> 
+                                            <th scope="col">Autor</th>                                        
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for unLibro in librosFavoritos %}
+                                            <tr>
+                                                <td>
+                                                    {{ unLibro.titulo}}
+                                                </td>
+                                                <td>
+                                                    {{ unLibro.autor }}
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-sm" href={{path('libro', {id:unLibro.id, libro:unLibro  })}} role="button">Ver Libro</a>
+                                                </td>
+                                        {% endfor %}
+                                        </tr>
+                                    </tbody>
+                                </table>
+
       </ul>
     </div>
 
@@ -193,4 +198,33 @@
     });
   </script>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

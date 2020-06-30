@@ -25,6 +25,9 @@
             <li>
                <a id="a-menu" class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
             </li>
+             <li>
+                <a id="a-menu" class="nav-link" href="{{ path('ver_favoritos') }}">Ver Favoritos <span class="sr-only">(current)</span></a>
+            </li>
             <li>
              <a id="a-menu" class="nav-link" href="{{ path('ver_perfiles') }}">Perfiles <span class="sr-only">(current)</span></a>
             </li>
@@ -40,6 +43,7 @@
             <li>
                 <a id="a-menu" class="nav-link" href="{{ path('app_logout') }}">Cerrar sesion <span class="sr-only">(current)</span></a>
             </li>
+
         </ul>
 
       </nav>
@@ -156,6 +160,16 @@
                   </div>
                 {% endif %}
               
+            {% endif %}
+
+            {% if estaEnFavoritos %}
+            <div class="row">
+               <a href = {{ path('quitar_de_favoritos', {libro_id: libro.id }) }} style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Quitar de Favoritos</a>
+            </div>
+            {% else %}
+              <div class="row">
+               <a href = {{ path('agregar_a_favoritos', {libro_id: libro.id }) }} style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Agregar A Favoritos</a>
+            </div>
             {% endif %}
 
         </div>
