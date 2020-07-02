@@ -101,12 +101,24 @@
 
           </div>
         </div>
+        {% if libro.getCapituloLibros() is empty %}
+        <br>
+        <div class="container"  style = "background : #F5F5F5; border-radius: 15px; padding: 2%;font-family: Asap Condensed;">
+          <div class="row justify-content-center" style = "font-family: Asap Condensed;">
+            <button type="button" class="btn btn-danger">No hay lectura disponible para este libro</button>
+          </div>
+        </div>
+        {% else %}
+        {# Variable para controlar la disponibilidad de las reseñas#}
+        {% set fechaMax = "now"|date("Y-m-d") %}
+        
         {# El libro se subio completo #}
             {% if libro.tipoDeCarga == true %}
             <div class="row-sm" style = "background: ">
               <div class="col-9">
                   {% if libro.capituloLibros[0].fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
                   <a   style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+                    {% set fechaMax = libro.capituloLibros[0].fechaDisponible|date('Y-m-d') %}
                     <h5 style= "font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{ libro.capituloLibros[0].fechaDisponible|date('Y-m-d') }} </h1>
                   {% else %}
                     <a href = "{{ path('libro_pdf', {id: libro.id, capitulo: -1 }) }}"  style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
@@ -116,19 +128,20 @@
             {% else %}
 
             {# El libro se subio por capitulos #}  
+
               {% if libro.completo %}
                 <div class="row justify-content-center" style = "font-family: Asap Condensed;">
                   
                  <div class="col-3" >
-                        {% set fechaDisp = 'ok' %}
+                        
                         {% for capitulo in libro.capituloLibros  %}
-                          {% if capitulo.fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
-                            {% set fechaDisp = capitulo.fechaDisponible|date('Y-m-d') %}
+                          {% if capitulo.fechaDisponible|date('Y-m-d') > fechaMax %}
+                            {% set fechaMax = capitulo.fechaDisponible|date('Y-m-d') %}
                           {% endif %}
                         {% endfor %}
-                        {% if fechaDisp is not same as('ok')  %}
+                        {% if fechaMax is not same as("now"|date("Y-m-d"))  %}
                           <a style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
-                          <h5 style= "text-transform: uppercase;font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{fechaDisp}} </h1>
+                          <h5 style= "text-transform: uppercase;font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{fechaMax}} </h1>
                         {% else %}
                            <a href = "{{ path('libro_pdf', {id: libro.id ,capitulo: -1 }) }}" style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
                         {% endif %}
@@ -161,13 +174,15 @@
                 {% endif %}
               
             {% endif %}
-
+          {#IF donde Finaliza la zona de capitulos#}  
+          {% endif %}
+          <br>
             {% if estaEnFavoritos %}
-            <div class="row">
+            <div class="row justify-content-center" style = "font-family: Asap Condensed;">
                <a href = {{ path('quitar_de_favoritos', {libro_id: libro.id }) }} style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Quitar de Favoritos</a>
             </div>
             {% else %}
-              <div class="row">
+              <div class="row justify-content-center" style = "font-family: Asap Condensed;">
                <a href = {{ path('agregar_a_favoritos', {libro_id: libro.id }) }} style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Agregar A Favoritos</a>
             </div>
             {% endif %}
@@ -175,6 +190,7 @@
         </div>
         <br>
         <br>
+
         <div class="row justify-content-center" >
           <div class="col-sm" >
             <div style="margin:auto ; width:50%">
@@ -188,28 +204,40 @@
          <div class="row justify-content-center" >
           <div class="col-sm" >
           {#COMENTARIO PROPIO#}
-          {% if not comentarUsuarioExistente %}
-          <h1 id = "text-box" > Tu opinion :  </h1>
-          
-          <div class="container"  id = "top-box" >
-            <h1  class="display-5" id = "text-box"> {{comentarioDelPerfil.perfil.nombre}} <span class="badge badge-secondary"> Puntuacion:  {{comentarioDelPerfil.calificacion}}/5</span> </h1>
-          </div>
-            <div class="container" id = "end-box">
-              {{comentarioDelPerfil.texto}}
+          {% if libro.completo == false or fechaMax is not same as("now"|date("Y-m-d")) %}
+            <div class="container"  style = "background : #F5F5F5; border-radius: 15px; padding: 2%;font-family: Asap Condensed;">
+              <div class="row justify-content-center" style = "font-family: Asap Condensed;margin: 2px">
+                <button type="button" class="btn btn-danger">No es posible realizar una reseña del libro, el libro no se encuentra disponible completo</button>
+              </div>
             </div>
-            <br>
-          <button type="button" class="btn btn-danger" onclick="preguntaBorrarComentario({{comentarioDelPerfil.getId()}})" style = "font-family: Asap Condensed;margin-left: 10px">Borrar</button>
           {% else %}
-          <div class="container" id = "top-box">
-            <h1  class="display-5" id = "text-box"> Agrega tu opinion:</h1>
-          </div>
-          <div class="container" id = "end-box">
-             {% embed "libro/comentarLibro.html.twig" %}
-              {% endembed %}
-          </div>
+            {% if not comentarUsuarioExistente %}
+            <h1 id = "text-box" > Tu reseña :  </h1>
+            
+            <div class="container"  id = "top-box" >
+              <h1  class="display-5" id = "text-box"> {{comentarioDelPerfil.perfil.nombre}} <span class="badge badge-secondary"> Puntuacion:  {{comentarioDelPerfil.calificacion}}/5</span> </h1>
+            </div>
+              <div class="container" id = "end-box">
+                {{comentarioDelPerfil.texto}}
+              </div>
+              <br>
+            <button type="button" class="btn btn-danger" onclick="preguntaBorrarComentario({{comentarioDelPerfil.getId()}})" style = "font-family: Asap Condensed;margin-left: 10px">Borrar</button>
+            {% else %}
+            <div class="container" id = "top-box">
+              <h1  class="display-5" id = "text-box"> Agrega tu reseña:</h1>
+            </div>
+            <div class="container" id = "end-box">
+              {% embed "libro/comentarLibro.html.twig" %}
+                {% endembed %}
+            </div>
 
-          
+            
+            {% endif %}
+
+
+            
           {% endif %}
+          
           <script>
                             function preguntaBorrarComentario(id){
                                 if(confirm('¿Estás seguro que deseas borrar su comentario?' )){
@@ -230,7 +258,7 @@
           <div class="col-sm" >
           
           
-         <h1 id = "text-box" >COMENTARIOS</h1>
+         <h1 id = "text-box" >RESEÑAS</h1>
          <div class="container" style = "background : #F5F5F5; border-radius: 15px">
          <br>
           {% for comen in libro.getCalificacionesComentarios() %}
@@ -245,9 +273,9 @@
           <div class="container" id = "end-box">
           {% if comen.spoiler %}
             {% if  comen.texto is not null %}
-              <a style="font-size:15px ; font-family: Asap Condensed; padding-right:20px" > Este comentario posee un SPOILER del libro       </a>
-            <button data-toggle="collapse" class="btn btn-danger" data-target="#texto-spoiler">Ver</button>
-            <div id="texto-spoiler" class="collapse">
+              <a style="font-size:15px ; font-family: Asap Condensed; padding-right:20px" > Esta reseña posee un SPOILER del libro       </a>
+            <button data-toggle="collapse" class="btn btn-danger" data-target="#texto-spoiler{{comen.id}}">Ver</button>
+            <div id="texto-spoiler{{comen.id}}" class="collapse">
             <p style="font-size:15px ; font-family: Noto Sans KR">
               {{comen.texto}}
             </p>
