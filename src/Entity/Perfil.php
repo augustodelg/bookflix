@@ -24,7 +24,7 @@ class Perfil
     private $nombre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Libro", inversedBy="perfils")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Libro", inversedBy="perfils", orphanRemoval=true)
      */
     private $favoritos;
 

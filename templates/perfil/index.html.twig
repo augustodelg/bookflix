@@ -72,6 +72,19 @@
 </div>
 <br>
 <a class="btn btn-warning" href="{{ path('modificar-cuenta') }}" role="button">Modificar</a>
+<br>
+<br>
+<button type="button" class="btn btn-danger" onclick="preguntarBorrarCuenta()">Eliminar cuenta</button>
+
+<script>
+            function preguntarBorrarCuenta(){
+              if(confirm('¿Estás seguro que deseas borrar tu cuenta de Bookflix?' )){
+               window.location.href="eliminarCuenta"; 
+
+               
+              }
+            }
+        </script>
 </div>
 </div>
 

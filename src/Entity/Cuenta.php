@@ -51,7 +51,7 @@ class Cuenta implements UserInterface
 
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Perfil", mappedBy="cuenta")
+     * @ORM\OneToMany(targetEntity="App\Entity\Perfil", mappedBy="cuenta", orphanRemoval=true)
      */
     private $perfiles;
 
