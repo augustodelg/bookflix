@@ -17,9 +17,21 @@
             <li class="active">
                <a id="a-menu" class="nav-link" href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
             </li>
+
             <li>
-             <a id="a-menu" class="nav-link" href="{{ path('ver_perfiles') }}">Perfiles <span class="sr-only">(current)</span></a>
+                <a id="a-menu" class="nav-link" href="{{ path('ver_favoritos') }}">Ver Favoritos <span class="sr-only">(current)</span></a>
             </li>
+             <li>
+                <a id="a-menu" class="nav-link" href="{{ path('ver_historial', {perfilActivo_id:perfilActivo.id}) }}">Ver Historial <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li>
+             <a id="a-menu" class="nav-link" href="{{ path('ver_perfiles') }}">Perfiles <span class="sr-only">(current)</span></a> 
+            </li>
+
+
+
+
             <li>
             <div class="container-fluid">
                {% embed 'prueba/formulario-prueba.html.twig' %}
