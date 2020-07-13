@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Repository\RegistroEventosRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,7 +25,7 @@ class Perfil
     private $nombre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Libro", inversedBy="perfils", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Libro", inversedBy="perfils")
      */
     private $favoritos;
 
@@ -43,10 +44,16 @@ class Perfil
      */
     private $calificacionesComentarios;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RegistroLibro", mappedBy="perfil")
+     */
+    private $historial;
+
     public function __construct()
     {
         $this->favoritos = new ArrayCollection();
         $this->calificacionesComentarios = new ArrayCollection();
+        $this->historial = new ArrayCollection();
     }
  
     public function getId(): ?int
@@ -151,4 +158,62 @@ class Perfil
     {
 
     }
+
+    /**
+     * @return Collection|RegistroLibro[]
+     */
+    public function getHistorial(): Collection
+    {
+        return $this->historial;
+    }
+
+    public function addHistorial(RegistroLibro $historial): self
+    {
+        if (!$this->historial->contains($historial)) {
+            $this->historial[] = $historial;
+            $historial->setPerfil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistorial(RegistroLibro $historial): self
+    {
+        if ($this->historial->contains($historial)) {
+            $this->historial->removeElement($historial);
+            // set the owning side to null (unless already changed)
+            if ($historial->getPerfil() === $this) {
+                $historial->setPerfil(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function contieneLibro(Libro $libro)
+    {
+        $historial_libros = $this->getHistorial();
+        $contiene = null;
+        for ($i=0; $i < count($historial_libros); $i++)
+        {
+            $libroHistorial = $historial_libros[$i]->getLibro();
+            if ($libro->getId() == $libroHistorial->getId() )
+            {
+                $contiene = $historial_libros[$i];
+                break;
+            }
+        }
+        return $contiene;
+
+
+    }
+/**
+ * 
+ */
+    public function cantidadCapitulosLeidos($libro_id,RegistroEventosRepository $registroEventosRepository)
+    {
+        $registros = $registroEventosRepository->buscarRegistros($libro_id,$this->getId(),$this->getCuenta()->getId());
+        return count($registros);
+    }
+
 }

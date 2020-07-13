@@ -151,14 +151,14 @@
     <div class="row">
   <div class="col-sm">
       <div class="container-fluid" id = "top-box" >
-        <h1  class="display-5" id = "text-box">Libros <span class="badge badge-secondary">Favoritos</span> </h1>
+        <h1  class="display-5" id = "text-box">Libros <span class="badge badge-secondary">Leidos</span> </h1>
       </div>
       <div class="container" id = "end-box">
       <ul id="navigation">
-
-    {% if librosFavoritos|length == 0 %}
-        <h1>Usted todavía no ha agregado libros a favoritos</h1>
+      {% if historial|length == 0 %}
+        <h1>Usted todavía no cuenta con libros leídos</h1>
       {% else %}
+      
 
                                 <table class="table datagrid">
                                     
@@ -166,46 +166,36 @@
                                         <tr>
                                             <th scope="col">Titulo</th> 
                                             <th scope="col">Autor</th>                                        
+                                            <th scope="col">Ultimo Acceso</th>
                                             <td></td>
                                             <td></td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for unLibro in librosFavoritos %}
+                                        {% for unHistorial in historial %}
                                             <tr>
                                                 <td>
-                                                    {{ unLibro.titulo}}
+                                                    {{ unHistorial.libro.titulo}}
                                                 </td>
                                                 <td>
-                                                    {{ unLibro.autor }}
+                                                    {{ unHistorial.libro.autor}}
                                                 </td>
+                                               <td>
+                                                    {{unHistorial.ultimoAcceso|date('Y-m-d')}}
+                                                </td>                                                
                                                 <td>
-                                                    <a class="btn btn-primary btn-sm" href={{path('libro', {id:unLibro.id, libro:unLibro  })}} role="button">Ver Libro</a>
+                                                    <a class="btn btn-primary btn-sm" href={{path('libro', {id:unHistorial.libro.id, libro:unHistorial.libro  })}} role="button">Ver Libro</a>
                                                 </td>
                                         {% endfor %}
                                         </tr>
                                     </tbody>
                                 </table>
-    {% endif %}
+           {% endif %} 
+
       </ul>
     </div>
 
-  <!-- Swiper JS -->
-<script src="https://unpkg.com/swiper/js/swiper.js"></script>
-<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
-
-<!-- Initialize Swiper -->
- <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 3,
-      spaceBetween: 30,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    });
-  </script>
 {% endblock %}
 
 
