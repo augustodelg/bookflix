@@ -32,6 +32,19 @@ class LibroRepository extends ServiceEntityRepository
         )->setMaxResults(10)->getResult();
     }
     
+    public function devolverLibros()
+    {
+        $em = $this->getEntityManager();
+        $resul = $em->createQuery(
+            "SELECT l
+             FROM  App\Entity\Libro l
+             ORDER BY l.cantidadLecturas DESC
+             "
+        );
+        return $resul->getResult();
+    }
+    
+    
     public function buscarLibro($texto, $criterio)
     {   
         $em = $this->getEntityManager();

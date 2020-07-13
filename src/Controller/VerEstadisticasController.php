@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use App\Repository\CuentaRepository;
+use App\Repository\LibroRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +19,19 @@ class VerEstadisticasController extends AbstractController
     {
         return $this->render('ver_estadisticas/index.html.twig', [
             'controller_name' => 'VerEstadisticasController',
+        ]);
+    }
+
+
+/**
+ * @Route("/ver/estadisticas/libros", name="ver_libros")
+ * @param LibroRepository
+ */
+    public function verLibros(LibroRepository $libroRepository, Request $request)
+    {
+        $libros = $libroRepository->devolverLibros();
+        return $this->render('ver_estadisticas/resultadoLibros.html.twig',[
+            'libros'=>$libros
         ]);
     }
 

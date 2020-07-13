@@ -170,7 +170,7 @@ class LibroController extends AbstractController
                 ]);
             }
         $valor_capitulo_aux = $capitulo;
-        
+
         if ($capitulo == -1 ) {
             $capitulos = $libro->getCapituloLibros();
         }else {
@@ -200,6 +200,7 @@ class LibroController extends AbstractController
                     $registroHistorialNuevo = new RegistroLibro();
                     $registroHistorialNuevo->setLibro($libro);
                     $registroHistorialNuevo->setUltimoAcceso($fecha_actual);
+                    $libro->setCantidadLecturas($libro->getCantidadLecturas()+1); // agrega una lectura nueva al libro
                     $perfilActivo->addHistorial($registroHistorialNuevo);
                     $em->persist($registroHistorialNuevo);
                     $em->flush();
@@ -225,12 +226,13 @@ class LibroController extends AbstractController
                 else  // si no lo leyó, consulto en los registros si leyó todos los capítulos
                     {
                         $cantidadCapitulosLeidos = $perfilActivo->cantidadCapitulosLeidos($id,$registroEventosRepository);
-                        $cantidadCapitulosLibro = count($libro->getCapituloLibros());
+                        $cantidadCapitulosLibro = $libro->getCantCapitulos();
                         if ($cantidadCapitulosLeidos == $cantidadCapitulosLibro)
                             {
                                 $registroHistorialNuevo = new RegistroLibro();
                                 $registroHistorialNuevo->setLibro($libro);
                                 $registroHistorialNuevo->setUltimoAcceso($fecha_actual);
+                                $libro->setCantidadLecturas($libro->getCantidadLecturas()+1); // agrega una lectura nueva al libro
                                 $perfilActivo->addHistorial($registroHistorialNuevo);
                                 $em->persist($registroHistorialNuevo);
                                 $em->flush();

@@ -130,6 +130,11 @@ class Libro
      */
     private $registrosLibros;
 
+    /**
+     * @ORM\Column(type="integer",options={"default":0} )
+     */
+    private $cantidadLecturas;
+
     public function __construct()
     {
         $this->generos = new ArrayCollection();
@@ -137,6 +142,7 @@ class Libro
         $this->capituloLibros = new ArrayCollection();
         $this->completo=false ;
         $this->calificacionesComentarios = new ArrayCollection();
+        $this->cantidadLecturas=0;
     }
 
     public function getId(): ?int
@@ -443,6 +449,18 @@ class Libro
             return $calificacion / $total;
         }
         return 0;
+    }
+
+    public function getCantidadLecturas(): ?int
+    {
+        return $this->cantidadLecturas;
+    }
+
+    public function setCantidadLecturas(int $cantidadLecturas): self
+    {
+        $this->cantidadLecturas = $cantidadLecturas;
+
+        return $this;
     }
 
 }
