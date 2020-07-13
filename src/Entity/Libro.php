@@ -124,6 +124,11 @@ class Libro
     private $calificacionesComentarios;
     // INDICA COMO SE SUBE EL LIBRO true = libro completo  --  false = por capitulo
  
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RegistroLibro", mappedBy="libro", orphanRemoval=true)
+     */
+    private $registrosLibros;
 
     public function __construct()
     {

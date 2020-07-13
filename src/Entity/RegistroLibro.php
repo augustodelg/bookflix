@@ -17,7 +17,7 @@ class RegistroLibro
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Libro")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Libro",inversedBy="registrosLibros")
      * @ORM\JoinColumn(nullable=false)
      */
     private $libro;

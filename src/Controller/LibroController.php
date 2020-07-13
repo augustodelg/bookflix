@@ -30,6 +30,7 @@ use Symfony\Component\Finder\Finder;
 
 use App\Form\CalificacionComentarioType;
 use DateTime;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class LibroController extends AbstractController
 {
@@ -116,8 +117,8 @@ class LibroController extends AbstractController
                    }
             }
        
-    
-        
+        //pregunto si el perfil activo leyo el libro 
+        $registroHistorial = is_null($perfilActivo->contieneLibro($libro)); 
 
         return $this->render('libro/index.html.twig', [
             'libro' => $libro,
@@ -127,6 +128,7 @@ class LibroController extends AbstractController
             'comentarUsuarioExistente' => $comentarioLibro->isEmpty(),
             'comentarioDelPerfil' => $comentarioLibro->first(),
             'estaEnFavoritos'=>$estaEnFavoritos,
+            'libroLeidoCompleto'=> $registroHistorial,
         ]);
     }
 

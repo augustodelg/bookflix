@@ -122,11 +122,11 @@
             <div class="row-sm" style = "background: ">
               <div class="col-9">
                   {% if libro.capituloLibros[0].fechaDisponible|date('Y-m-d') > "now"|date("Y-m-d") %}
-                  <a   style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+                  <a   style= "margin: auto ; display:block ; max-width:200px;font-family: Asap Condensed;" class="btn btn-warning">Leer libro completo</a>
                     {% set fechaMax = libro.capituloLibros[0].fechaDisponible|date('Y-m-d') %}
                     <h5 style= "font-family: Asap Condensed; margin-top: 15px"> Disponible el : {{ libro.capituloLibros[0].fechaDisponible|date('Y-m-d') }} </h1>
                   {% else %}
-                    <a href = "{{ path('libro_pdf', {id: libro.id, capitulo: -1 }) }}"  style= "margin: auto ; display:block ; max-width:200px" class="btn btn-warning">Leer libro completo</a>
+                    <a href = "{{ path('libro_pdf', {id: libro.id, capitulo: -1 }) }}"  style= "margin: auto ; display:block ; max-width:200px;font-family: Asap Condensed;" class="btn btn-warning">Leer libro completo</a>
                   {% endif %}
               </div>
             </div>
@@ -182,12 +182,15 @@
           {#IF donde Finaliza la zona de capitulos#}  
           {% endif %}
           <br>
+          <br>
             {% if estaEnFavoritos %}
             <div class="row justify-content-center" style = "font-family: Asap Condensed;">
                <a href = {{ path('quitar_de_favoritos', {libro_id: libro.id }) }} style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Quitar de Favoritos</a>
             </div>
             {% else %}
+            
               <div class="row justify-content-center" style = "font-family: Asap Condensed;">
+              
                <a href = {{ path('agregar_a_favoritos', {libro_id: libro.id }) }} style= "margin: auto ; display:block ; max-width:200px; margin: 1%" class="btn btn-warning">Agregar A Favoritos</a>
             </div>
             {% endif %}
@@ -202,7 +205,7 @@
               <hr>
             </div>
 
-            <a class="btn btn-warning" style="display:block ; margin:auto ; max-width:80px" href="{{ path('home') }}">Volver</a>
+            <a class="btn btn-warning" style="display:block ; margin:auto ; max-width:80px;font-family: Asap Condensed;" href="{{ path('home') }}">Volver</a>
           </div>
         </div>
          <br>
@@ -227,20 +230,31 @@
               </div>
               <br>
             <button type="button" class="btn btn-danger" onclick="preguntaBorrarComentario({{comentarioDelPerfil.getId()}})" style = "font-family: Asap Condensed;margin-left: 10px">Borrar</button>
+            </div>
             {% else %}
-            <div class="container" id = "top-box">
+            
+            {% if not libroLeidoCompleto %}
+              <div class="container" id = "top-box">
               <h1  class="display-5" id = "text-box"> Agrega tu reseña:</h1>
             </div>
             <div class="container" id = "end-box">
               {% embed "libro/comentarLibro.html.twig" %}
                 {% endembed %}
+              </div>
+            {% else %}
+                <div class="container"  style = "background : #F5F5F5; border-radius: 15px; padding: 2%;font-family: Asap Condensed;">
+              <div class="row justify-content-center" style = "font-family: Asap Condensed;margin: 2px">
+                <button type="button" class="btn btn-danger">No es posible reseñar el libro, primero debe leer lo completo</button>
+              </div>
+            </div>
+            {% endif %}
             </div>
 
             
             {% endif %}
 
 
-            
+            </div>
           {% endif %}
           
           <script>
@@ -253,9 +267,9 @@
              
 
             
-          </div>
 
-        </div>
+
+
                   <br>
 
         {#ZONA DE COMENTARIOS#}
@@ -302,11 +316,14 @@
           
           </div>
 <br>
+<br>
+<br>
         </div>
       </div>
 
     </div>
 
 </div>
+        </div>
 
 {% endblock %}
