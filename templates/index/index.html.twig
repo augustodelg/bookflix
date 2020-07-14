@@ -45,30 +45,49 @@
       -webkit-align-items: center;
       align-items: center;
     }
+
+
+    
   </style>
 </head>
-<body>
-<div class="container">
+<body >
+
+
+<div class="container"style="transform: scale(0.9)">
     <div class="col-xl-12 col-sm-12" style="margin-top:-3%">
     <img src="{{ asset('logo.svg', 'images') }}" class=" img-fluid rounded mx-auto d-block" height="200" width="800" alt="Bookflix" id="logo" style= "padding: 8%;" >
     </div>
 <div class="text-center">
-<a href="{{ path('app_login') }}" class="btn btn-warning btn-lg active" style="font-family: Asap Condensed;text-transform: uppercase;" role="button" aria-pressed="true">Iniciar sesion</a>
-<a href="{{ path('registro') }}" class="btn btn-secondary btn-lg active" style="font-family: Asap Condensed;text-transform: uppercase;" role="button" aria-pressed="true">Registrarse</a>
+<div class="row justify-content-center">
+<div class="col-4" style="margin-top:-2%">
+  <a href="{{ path('app_login') }}" class="btn btn-warning btn-lg active" style="font-family: Asap Condensed;text-transform: uppercase;" role="button" aria-pressed="true" >Iniciar sesion</a>
+</div>
+<div class="col-4" style="margin-top:-2%">
+  <a href="{{ path('registro') }}" class="btn btn-secondary btn-lg active" style="font-family: Asap Condensed;text-transform: uppercase;" role="button" aria-pressed="true">Registrarse</a>
+</div>
+</div>
+</div>
+<div style ="height: 300px;">
+  <img src="{{ asset('decoration_bienvenido.svg', 'images') }}" class=" img-fluid rounded mx-auto d-block" style= "position:relative;z-index: -1;top:-90px" >
+</div>
+
+<div >
+  <img src="{{ asset('fondo_index.svg', 'images') }}" class=" img-fluid rounded mx-auto d-block" style= "position:absolute; z-index: -2; top:400px;right: -14px; height: 700px; width: 1750px;transform: scale(1.075)" >
 </div>
 <br>
 <br>
-<div class="container" style="background: #fff152 ; border-radius: 1.5% ; padding:10px" >
+<div class="container" style="background: #fff152 ; border-top-left-radius: 15px ; border-top-right-radius: 15px;  ; padding:13px" >
+
 <br>
 
 
 
 
 
-<p class="h3 text-center" style="font-family: Asap Condensed;text-transform: uppercase;"> Algo de lo que podras encontrar:</p>
+<p class="h2 text-center" style="color:#1f1f44;font-family: Asap Condensed;text-transform: uppercase;margin:10px"> ¡Algo de lo que podras encontrar!</p>
 <br>
   <!-- Swiper -->
-  <div class="swiper-container">
+  <div class="swiper-container" style="padding: 2%; background: #FFFFFF; border-radius:15px; transform: scale(0.9)">
     <div class="swiper-wrapper">
 
      {% for i in arrayPortadas %}
@@ -86,9 +105,15 @@
     </div>
     <br>
   </div>
+  <div class="container" style="background: #ffda40 ; border-radius: 0% ; padding:13px; border-bottom-right-radius:15px; border-bottom-left-radius:15px;" >
+      <h6 style="color:#1f1f44;font-family: Asap Condensed; text-transform: uppercase; padding-right:6% ; padding-top: 3%;padding-bottom: 2%;text-align:right;">  Power by DevLenny </h6>
+  </div>
   </div>
 
-
+<br>
+<br>
+<br>
+<br>
 <!-- Swiper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>

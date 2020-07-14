@@ -222,11 +222,13 @@
                                 <p> No se encontraron resultados para su búsqueda </p>
                             {% endif %}
 
-                        <a class="btn btn-primary btn-sm" href={{path('ver_estadisticas')}} role="button">Volver</a>
+                       
 
                             {% endblock %}
                         </section>
-
+                        <div class="container" style="margin-left: 2px">
+                            <a  class="btn btn-primary btn-sm" href={{path('ver_estadisticas')}} role="button">Volver</a>
+                        </div>
                         {% block content_footer_wrapper %}
                             <section class="content-footer">
                                 {% block content_footer %}{% endblock %}

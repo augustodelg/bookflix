@@ -280,6 +280,13 @@
          <h1 id = "text-box" >RESEÑAS</h1>
          <div class="container" style = "background : #F5F5F5; border-radius: 15px">
          <br>
+         {% if libro.getCalificacionesComentarios() is empty %}
+           <div class="container" >
+            <div class="row" style= "font-family: Noto Sans KR; display: block ; margin: auto; padding: 2%" >
+              <p class="text-center"> No hay reseñas de este libro, se el primero!</p>
+            </div>
+           </div>
+         {% endif %}
           {% for comen in libro.getCalificacionesComentarios() %}
           <div class="container"  id = "top-box" >
             <div class="row" >

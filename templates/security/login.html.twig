@@ -22,12 +22,21 @@ body{
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Iniciar sesion</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+    <div class="container" style="transform: scale(0.9)">
+    <div class="container"id = "top-box">
+        <h1 class="h3 mb-3 font-weight-normal" id = "text-box" >Iniciar sesion</h1>
+    </div>
+    
+        <div class="container" id = "end-box" >
+        <label style="font-family:Asap Condensed" for="inputEmail">Email</label>
+        <input  type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+        <br>
+        <label style="font-family:Asap Condensed" for="inputPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" required>
+        </div>
+    
+    
+    
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
